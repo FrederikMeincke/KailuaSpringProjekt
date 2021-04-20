@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<p>lol</p>
+<h1>Customer List</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Mobile nr.</th>
+        <th>Phone nr.</th>
+        <th>e-mail</th>
+        <th>Drivers License nr.</th>
+        <th>Drivers License issue date</th>
+        <th>Drivers License expire date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer:${customers}">
+        <td th:text="${customer.id}"/>
+        <td th:text="${customer.name}"/>
+        <td th:text="${customer.mobile}"/>
+        <td th:text="${customer.phone}"/>
+        <td th:text="${customer.email}"/>
+        <td th:text="${customer.license}"/>
+        <td th:text="${customer.issue}"/>
+        <td th:text="${customer.expire}"/>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
