@@ -4,10 +4,10 @@ import com.example.kailuaspring.Model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
-import java.sql.ResultSet;
 import java.util.List;
 
 @Repository
@@ -32,9 +32,13 @@ public class CustomerRepo {
         String sqlZipCity = "INSERT INTO zipcity (zip_id, zip) VALUES (DEFAULT, ?)";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         String sqlLastAdded = "SELECT zip_id FROM kailua_cars.zipcity ORDER BY zip_id DESC limit 1;";
-        int zip = jdbcTemplate.query(sqlLastAdded,rowMapper,customer.getZip());
+
+        SqlRowSet zip = jdbcTemplate.queryForRowSet(sqlLastAdded);
+        zip.next();
+        int zipInt = zip.getInt("zip_id");
+        //TODO: Get the last zip_id added and create a new zip_id if the zip code doesn't exist already dito with address
         jdbcTemplate.update(sqlZipCity,customer.getZip());
-        jdbcTemplate.update(sqlAddress,customer.get);
+        //jdbcTemplate.update(sqlAddress,);
         jdbcTemplate.update(sqlCustomer,customer.getCustomers_name(),customer.getCustomers_mobile(),customer.getCustomers_phone(),customer.getCustomers_email(),customer.getCustomers_drivers_license(),customer.getCustomers_drivers_license_issuedate(),customer.getCustomers_drivers_license_expiredate(),customer.getAddress_street(),customer.getAddress_number(),customer.getAddress_floor());
         return null;
     }
