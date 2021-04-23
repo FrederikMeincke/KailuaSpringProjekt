@@ -2,35 +2,53 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kailua Spring</title>
     <link rel="stylesheet" type="text/css" href="MyCSS.css">
 </head>
 <body>
 <h1>Customer List</h1>
 
+<a href="/create">
+<button class="btn-create" id="btn-create">Add new customer</button>
+</a>
+
 <table>
     <thead>
     <tr>
-        <th>ID</th>
+        <th style="text-align: right">ID</th>
         <th>Name</th>
-        <th>Mobile nr.</th>
-        <th>Phone nr.</th>
+        <th>Mobile no.</th>
+        <th>Phone no.</th>
         <th>e-mail</th>
-        <th>Drivers License nr.</th>
+        <th>Drivers License no.</th>
         <th>Drivers License issue date</th>
         <th>Drivers License expire date</th>
+        <th>Street Name</th>
+        <th>Street no.</th>
+        <th>Floor</th>
+        <th>Zip</th>
+        <th>City</th>
+        <th>Country</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="customer:${customers}">
-        <td th:text="${customer.id}"/>
-        <td th:text="${customer.name}"/>
-        <td th:text="${customer.mobile}"/>
-        <td th:text="${customer.phone}"/>
-        <td th:text="${customer.email}"/>
-        <td th:text="${customer.license}"/>
-        <td th:text="${customer.issue}"/>
-        <td th:text="${customer.expire}"/>
+    <!-- Display all customers information-->
+    <tr th:each="customers:${customerList}">
+        <td th:text="${customers.customers_id}"/>
+        <td th:text="${customers.customers_name}"/>
+        <td th:text="${customers.customers_mobile}"/>
+        <td th:text="${customers.customers_phone}"/>
+        <td th:text="${customers.customers_email}"/>
+        <td th:text="${customers.customers_drivers_license}"/>
+        <td th:text="${customers.customers_drivers_license_issuedate}"/>
+        <td th:text="${customers.customers_drivers_license_expiredate}"/>
+        <td th:text="${customers.address_street}"/>
+        <td th:text="${customers.address_number}"/>
+        <td th:text="${customers.address_floor}"/>
+        <td th:text="${customers.zip}"/>
+        <td th:text="${customers.city}"/>
+        <td th:text="${customers.country}"/>
     </tr>
     </tbody>
 </table>

@@ -17,7 +17,7 @@ public class HomeController {
     @GetMapping("/")
     public String index(Model model){
         List<Customer> customerList = customerService.fetchAll();
-        model.addAttribute("customers",customerList);
+        model.addAttribute("customerList",customerList);
         return "home/index";
     }
 }
