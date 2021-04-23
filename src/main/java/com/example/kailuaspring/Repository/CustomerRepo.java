@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+
+import java.sql.ResultSet;
 import java.util.List;
 
 @Repository
@@ -23,6 +25,17 @@ public class CustomerRepo {
     }
 
     public Customer addCustomer(Customer customer){
+        String sqlCustomer = "INSERT INTO customers (customers_id, customers_name, customers_mobile, customers_phone, customers_email, " +
+                "customers_drivers_license, customers_drivers_license_issuedate, customers_drivers_license_expiredate) " +
+                "VALUES (DEFAULT,?,?,?,?,?,?,?,?,?,?)";
+        String sqlAddress = "INSERT INTO address (DEFAULT, address_street, address_number, address_floor) VALUES ();";
+        String sqlZipCity = "INSERT INTO zipcity (zip_id, zip) VALUES (DEFAULT, ?)";
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+        String sqlLastAdded = "SELECT zip_id FROM kailua_cars.zipcity ORDER BY zip_id DESC limit 1;";
+        int zip = jdbcTemplate.query(sqlLastAdded,rowMapper,customer.getZip());
+        jdbcTemplate.update(sqlZipCity,customer.getZip());
+        jdbcTemplate.update(sqlAddress,customer.get);
+        jdbcTemplate.update(sqlCustomer,customer.getCustomers_name(),customer.getCustomers_mobile(),customer.getCustomers_phone(),customer.getCustomers_email(),customer.getCustomers_drivers_license(),customer.getCustomers_drivers_license_issuedate(),customer.getCustomers_drivers_license_expiredate(),customer.getAddress_street(),customer.getAddress_number(),customer.getAddress_floor());
         return null;
     }
 

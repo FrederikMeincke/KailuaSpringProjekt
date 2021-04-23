@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -19,5 +21,15 @@ public class HomeController {
         List<Customer> customerList = customerService.fetchAll();
         model.addAttribute("customerList",customerList);
         return "home/index";
+    }
+    @GetMapping("/addNewCustomer")
+    public String addNewCustomer(){
+        return "home/addNewCustomer";
+    }
+
+    @PostMapping("/addNewCustomer")
+    public String addNewCustomer(@ModelAttribute Customer customer){
+        customerService.addCustomer(customer);
+        return "redirect:/";
     }
 }
