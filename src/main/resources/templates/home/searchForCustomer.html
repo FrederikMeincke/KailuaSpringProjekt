@@ -1,11 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Searched Info</title>
+    <link rel="stylesheet" type="text/css" href="MyCSS.css">
 </head>
 <body>
-    <h1>Hej</h1>
+    <h1>Search results</h1>
+
+    <div class="searchbar">
+
+        <form name="search" method="post" action="/searchForCustomer">
+            <input type="text" name="search" placeholder="Search here...">
+            <input type="submit" value="search"/>
+            <br>
+        </form>
+    </div>
 
     <table>
         <thead>
@@ -47,6 +58,8 @@
         </tr>
         </tbody>
     </table>
-
+    <a href="/">
+        <button class="btn-create" id="btn-create">Return Home</button>
+    </a>
 </body>
 </html>
