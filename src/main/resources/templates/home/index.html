@@ -13,21 +13,12 @@
 <button class="btn-create" id="btn-create">Add new customer</button>
 </a>
 
+<div class="searchbar">
 
-<a th:href="@{'/findCustomer/'+${customers_id}}">
-    <button class="btn-findCustomer", id="btn-findCustomer">Find Customer</button>
-</a>
-
-<div>
-
-    <a href="/searchForCustomer">
-      <button class="btn-search" id="btn-search">Search</button>
-    </a>
-
-    <form>
-        <input type="text" name="search_box" placeholder="Search here...">
+    <form name="search" method="post" action="/searchForCustomer">
+        <input type="text" name="search" placeholder="Search here...">
+        <input type="submit" value="search"/>
     </form>
-
 </div>
 
 <table>

@@ -39,4 +39,13 @@ public class HomeController {
         model.addAttribute("customer", customerService.findCustomerByID(id));
         return "home/findCustomer";
     }
+
+
+    @PostMapping("/searchForCustomer")
+    public String searchForCustomer(Model model, String search) {
+        List<Customer> customerList = customerService.searchForCustomer(search);
+        model.addAttribute("customerList", customerList);
+        model.addAttribute(search);
+        return "home/searchForCustomer";
+    }
 }

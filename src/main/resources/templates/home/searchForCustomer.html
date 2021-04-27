@@ -5,6 +5,48 @@
     <title>Title</title>
 </head>
 <body>
+    <h1>Hej</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th style="text-align: right">ID</th>
+            <th>Name</th>
+            <th>Mobile no.</th>
+            <th>Phone no.</th>
+            <th>e-mail</th>
+            <th>Drivers License no.</th>
+            <th>Drivers License issue date</th>
+            <th>Drivers License expire date</th>
+            <th>Street Name</th>
+            <th>Street no.</th>
+            <th>Floor</th>
+            <th>Zip</th>
+            <th>City</th>
+            <th>Country</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Display all customers information-->
+        <tr th:each="customers:${customerList}">
+            <td th:text="${customers.customers_id}"/>
+            <td th:text="${customers.customers_name}"/>
+            <td th:text="${customers.customers_mobile}"/>
+            <td th:text="${customers.customers_phone}"/>
+            <td th:text="${customers.customers_email}"/>
+            <td th:text="${customers.customers_drivers_license}"/>
+            <td th:text="${customers.customers_drivers_license_issuedate}"/>
+            <td th:text="${customers.customers_drivers_license_expiredate}"/>
+            <td th:text="${customers.address_street}"/>
+            <td th:text="${customers.address_number}"/>
+            <td th:text="${customers.address_floor}"/>
+            <td th:text="${customers.zip}"/>
+            <td th:text="${customers.city}"/>
+            <td th:text="${customers.country}"/>
+
+        </tr>
+        </tbody>
+    </table>
 
 </body>
 </html>

@@ -26,6 +26,10 @@ public class CustomerService {
         return customerRepo.findCustomerByID(id);
     }
 
+    public List<Customer> searchForCustomer(String name){
+        return customerRepo.searchForCustomer(name);
+    }
+
     public Boolean deleteCustomer(int id){
         return customerRepo.deleteCustomer(id);
     }
