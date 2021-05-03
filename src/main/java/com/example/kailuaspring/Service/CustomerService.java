@@ -14,8 +14,12 @@ public class CustomerService {
     @Autowired
     CustomerRepo customerRepo;
 
-    public List<Customer> fetchAll(){
-        return customerRepo.fetchAll();
+    public List<Customer> fetchAllCustomers(){
+        return customerRepo.fetchAllCustomers();
+    }
+
+    public List<Customer> fetchAllContracts(){
+        return customerRepo.fetchAllContracts();
     }
 
     public Customer addCustomer(Customer customer){
@@ -37,5 +41,7 @@ public class CustomerService {
     public Customer updateCustomer(int id, Customer customer){
         return customerRepo.updateCustomer(id,customer);
     }
+
+    //public Contract searchForContract//todo here
 
 }

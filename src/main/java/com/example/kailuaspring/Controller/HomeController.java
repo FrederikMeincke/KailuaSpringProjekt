@@ -19,7 +19,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model){
-        List<Customer> customerList = customerService.fetchAll();
+        List<Customer> customerList = customerService.fetchAllCustomers();
         model.addAttribute("customerList",customerList);
         return "home/index";
     }
@@ -58,4 +58,10 @@ public class HomeController {
             return "redirect:/";
         }
     }
+
+//    @GetMapping("showContract/{id}")
+//    public String showContract(@PathVariable("id") int id) {
+//        customerService.
+//
+//    }
 }

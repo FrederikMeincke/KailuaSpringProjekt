@@ -62,6 +62,9 @@
         <td th:text="${customers.country}"/>
 
         <td>
+            <a th:href="@{'/showContract/'+${customers.customers_id}}">
+                <button class="btn-show" id="show-contract">Show contracts</button>
+
             <a th:href="@{'/delete/'+${customers.customers_id}}">
                 <button class="btn-delete" id="btn-delete">Delete Customer</button>
             </a>
