@@ -7,16 +7,24 @@
     <link rel="stylesheet" type="text/css" href="MyCSS.css">
 </head>
 <body>
-    <h1>Search results</h1>
 
-    <div class="searchbar">
+<!-- Menu Bar -->
+<div class="topnav">
+    <a class="active" href="/">Home</a>
+    <a href="/showAllCustomers">Customers</a>
+    <a href="/showAllContracts">Contracts</a>
+    <a href="/showAllCars">Cars</a>
+</div>
 
-        <form name="search" method="post" action="/searchForCustomer">
-            <input type="text" name="search" placeholder="Search here...">
-            <input type="submit" value="search"/>
-            <br>
-        </form>
-    </div>
+<h1>Search results</h1>
+<!-- Search Bar -->
+ <div class="searchbar">
+     <form name="search" method="post" action="/searchForCustomer">
+         <input type="text" name="search" placeholder="Search here...">
+         <input type="submit" value="search"/>
+         <br>
+     </form>
+ </div>
 
     <table>
         <thead>
@@ -58,8 +66,5 @@
         </tr>
         </tbody>
     </table>
-    <a href="/">
-        <button class="btn-create" id="btn-create">Return Home</button>
-    </a>
 </body>
 </html>

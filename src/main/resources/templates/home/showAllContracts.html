@@ -7,6 +7,15 @@
     <link rel="stylesheet" type="text/css" href="MyCSS.css">
 </head>
 <body>
+
+<!-- Menu Bar -->
+<div class="topnav">
+    <a class="active" href="/">Home</a>
+    <a href="/showAllCustomers">Customers</a>
+    <a href="/showAllContracts">Contracts</a>
+    <a href="/showAllCars">Cars</a>
+</div>
+
 <h1>
     Contract list
 </h1>
@@ -41,9 +50,6 @@
         <td th:text="${contract.car_models_name}"/>
         <td th:text="${contract.car_models_fueltype}"/>
         <td th:text="${contract.cars_type}"/>
-
-        <td> <!-- todo buttons here?-->
-        </td>
     </tr>
     </tbody>
 </table>

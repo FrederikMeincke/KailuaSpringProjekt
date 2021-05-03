@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kailua Spring</title>
+    <link rel="stylesheet" type="text/css" href="MyCSS.css">
+</head>
+<body>
+
+<!-- Menu Bar -->
+<div class="topnav">
+    <a class="active" href="/">Home</a>
+    <a href="/showAllCustomers">Customers</a>
+    <a href="/showAllContracts">Contracts</a>
+    <a href="/showAllCars">Cars</a>
+</div>
+
+<h1>Customer List</h1>
+
+<a href="/addNewCustomer">
+    <button class="btn-create" id="btn-create">Add new customer</button>
+</a>
+
+<a href="/showAllContracts">
+    <button class="btn-create" id="btn-contracts">Show all contracts</button>
+</a>
+
+
+<div class="searchbar">
+
+    <form name="search" method="post" action="/searchForCustomer">
+        <input type="text" name="search" placeholder="Search here...">
+        <input type="submit" value="search"/>
+    </form>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: right">ID</th>
+        <th>Name</th>
+        <th>Mobile no.</th>
+        <th>Phone no.</th>
+        <th>e-mail</th>
+        <th>Drivers License no.</th>
+        <th>Drivers License issue date</th>
+        <th>Drivers License expire date</th>
+        <th>Street Name</th>
+        <th>Street no.</th>
+        <th>Floor</th>
+        <th>Zip</th>
+        <th>City</th>
+        <th>Country</th>
+        <th>Actions:</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Display all customers information-->
+    <tr th:each="customers:${customerList}">
+        <td th:text="${customers.customers_id}"/>
+        <td th:text="${customers.customers_name}"/>
+        <td th:text="${customers.customers_mobile}"/>
+        <td th:text="${customers.customers_phone}"/>
+        <td th:text="${customers.customers_email}"/>
+        <td th:text="${customers.customers_drivers_license}"/>
+        <td th:text="${customers.customers_drivers_license_issuedate}"/>
+        <td th:text="${customers.customers_drivers_license_expiredate}"/>
+        <td th:text="${customers.address_street}"/>
+        <td th:text="${customers.address_number}"/>
+        <td th:text="${customers.address_floor}"/>
+        <td th:text="${customers.zip}"/>
+        <td th:text="${customers.city}"/>
+        <td th:text="${customers.country}"/>
+
+        <td>
+            <a th:href="@{'/showContracts/'+${customers.customers_id}}">
+                <button class="btn-show" id="show-contract">Show contracts</button>
+            </a>
+
+            <a th:href="@{'/delete/'+${customers.customers_id}}">
+                <button class="btn-delete" id="btn-delete">Delete Customer</button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

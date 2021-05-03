@@ -25,6 +25,18 @@ public class HomeController {
         return "home/index";
     }
 
+    @GetMapping("/showAllCustomers")
+    public String showAllCustomers(Model model){
+        List<Customer> customerList = customerService.fetchAllCustomers();
+        model.addAttribute("customerList",customerList);
+        return "home/showAllCustomers";
+    }
+
+    @GetMapping("/showAllCars")
+    public String showAllCars(Model model){
+        return "home/showAllCars";
+    }
+
     @GetMapping("/showAllContracts")
     public String showAllContracts(Model model) {
         List<Contract> contractList = customerService.fetchAllContracts();
