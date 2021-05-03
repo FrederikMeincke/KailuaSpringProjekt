@@ -87,7 +87,13 @@ public class CustomerRepo {
      * @return
      */
     public Boolean deleteCustomer(int id){
-        return null;
+        try {
+            String sql = "DELETE FROM customers WHERE customers_id = ?";
+            return jdbcTemplate.update(sql, id) < 0;
+        } catch (Exception e) {
+            return true;
+        }
+
     }
 
     /**

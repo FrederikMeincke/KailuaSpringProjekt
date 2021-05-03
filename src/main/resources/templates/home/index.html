@@ -13,6 +13,8 @@
 <button class="btn-create" id="btn-create">Add new customer</button>
 </a>
 
+
+
 <div class="searchbar">
 
     <form name="search" method="post" action="/searchForCustomer">
@@ -38,6 +40,7 @@
         <th>Zip</th>
         <th>City</th>
         <th>Country</th>
+        <th>Actions:</th>
     </tr>
     </thead>
     <tbody>
@@ -58,6 +61,11 @@
         <td th:text="${customers.city}"/>
         <td th:text="${customers.country}"/>
 
+        <td>
+            <a th:href="@{'/delete/'+${customers.customers_id}}">
+                <button class="btn-delete" id="btn-delete">Delete Customer</button>
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>

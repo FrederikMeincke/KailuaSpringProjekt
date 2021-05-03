@@ -48,4 +48,14 @@ public class HomeController {
         model.addAttribute(search);
         return "home/searchForCustomer";
     }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") int id) {
+        boolean deleted = customerService.deleteCustomer(id);
+        if (deleted) {
+            return "home/errorPage";
+        } else {
+            return "redirect:/";
+        }
+    }
 }

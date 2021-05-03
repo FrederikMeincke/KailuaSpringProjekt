@@ -29,3 +29,7 @@ tr:nth-child(even){
     background-color: lightgrey;
 }
 
+#btn-delete{
+    background-color: lightsteelblue;
+}
+
