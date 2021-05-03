@@ -1,37 +1,40 @@
-table{
+#pagecss {
+    font-family: Arial, sans-serif;
     border-collapse: collapse;
+    width: 100%;
 }
 
-.btn{
-    border: none;
-    color: white;
-    padding: 7px 10px;
-    text-align: center;
-}
-
-.btn:hover{
-    box-shadow: 2px 2px 2px yellow;
-}
-
-#btn-create{
-    background-color: white;
-}
-
-th{
-    background-color: lightsteelblue;
-}
-td, th{
-    border: 1px solid black;
-    text-align: center;
+#pagecss td, #indexpagecss th {
+    border: 1px solid #ddd;
     padding: 10px;
-}
-tr:nth-child(even){
-    background-color: lightgrey;
+    text-align: center;
 }
 
-#btn-delete{
-    background-color: lightsteelblue;
+#pagecss tr:nth-child(even){background-color: #f2f2f2}
+
+#pagecss tr:hover {background-color: #ddd}
+
+#pagecss th {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    background-color: #008cba;
+    color: #ffffff;
 }
+
+#searchidname {
+    float: right;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    border: none;
+    font-size: 20px;
+}
+
+#newCustomer {
+
+}
+
 
 /* Adds a black background color to the top navigation */
 .topnav {
