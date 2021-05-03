@@ -1,5 +1,6 @@
 package com.example.kailuaspring.Controller;
 
+import com.example.kailuaspring.Model.Contract;
 import com.example.kailuaspring.Model.Customer;
 import com.example.kailuaspring.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,21 @@ public class HomeController {
         model.addAttribute("customerList",customerList);
         return "home/index";
     }
+
+    @GetMapping("/showAllContracts")
+    public String showAllContracts(Model model) {
+        List<Contract> contractList = customerService.fetchAllContracts();
+        model.addAttribute("contractList", contractList);
+        return "home/showAllContracts";
+    }
+
+    @GetMapping("/showContracts/{id}")
+    public String showContracts(@PathVariable("id") int id, Model model) {
+        List<Contract> contractList = customerService.findContractsByCustomer(id);
+        model.addAttribute("contractList", contractList);
+        return "home/showAllContracts";
+    }
+
     @GetMapping("/addNewCustomer")
     public String addNewCustomer(){
         return "home/addNewCustomer";
@@ -34,11 +50,11 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @GetMapping("/findCustomer/{id}")
-    public String findCustomer(@PathVariable ("id") int id, Model model){
-        model.addAttribute("customer", customerService.findCustomerByID(id));
-        return "home/findCustomer";
-    }
+//    @GetMapping("/findCustomer/{id}")
+//    public String findCustomer(@PathVariable ("id") int id, Model model){
+//        model.addAttribute("customer", customerService.findCustomerByID(id));
+//        return "home/findCustomer";
+//    }
 
 
     @PostMapping("/searchForCustomer")

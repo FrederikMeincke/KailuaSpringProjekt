@@ -13,6 +13,9 @@
 <button class="btn-create" id="btn-create">Add new customer</button>
 </a>
 
+<a href="/showAllContracts">
+    <button class="btn-create" id="btn-contracts">Show all contracts</button>
+</a>
 
 
 <div class="searchbar">
@@ -62,8 +65,9 @@
         <td th:text="${customers.country}"/>
 
         <td>
-            <a th:href="@{'/showContract/'+${customers.customers_id}}">
+            <a th:href="@{'/showContracts/'+${customers.customers_id}}">
                 <button class="btn-show" id="show-contract">Show contracts</button>
+            </a>
 
             <a th:href="@{'/delete/'+${customers.customers_id}}">
                 <button class="btn-delete" id="btn-delete">Delete Customer</button>

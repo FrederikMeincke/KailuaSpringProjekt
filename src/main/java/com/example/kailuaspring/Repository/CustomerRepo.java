@@ -24,23 +24,45 @@ public class CustomerRepo {
      * @return
      */
     public List<Customer> fetchAllCustomers(){
-        //String sql = "SELECT * FROM customers";
         String sql = "SELECT customers_id, customers_name, customers_mobile, customers_phone, customers_email, customers_drivers_license, customers_drivers_license_issuedate, customers_drivers_license_expiredate, address_street, address_number, address_floor, zip, city, country FROM kailua_cars.customers inner join address on address_id = customers_address inner join zipcity on address_zip = zip_id;";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         return jdbcTemplate.query(sql,rowMapper);
     }
 
     public List<Contract> fetchAllContracts() {
-        String sql = "";
+        String sql = "SELECT contracts_id, cu.customers_name, contracts_fromdate, contracts_todate, contracts_maxkm," +
+                " contracts_startkm, c.cars_license_plate, cb.car_brand, cm.car_models_name, cm.car_models_fueltype," +
+                " cm.cars_type FROM" +
+                " contracts " +
+                "JOIN customers cu on contracts.contracts_customer = cu.customers_id " +
+                "JOIN cars c on c.cars_id = contracts.contracts_cars_id " +
+                "JOIN car_models cm on c.cars_model_id = cm.car_models_id " +
+                "JOIN car_brands cb on cb.car_brand_id = cm.car_models_brand_id;";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         return jdbcTemplate.query(sql,rowMapper);
     }
 
-    /**
-     *
-     * @param customer
-     * @return
-     */
+    public List<Contract> searchForContractsByCustomer(int id) {
+        String sql = "SELECT contracts_id, cu.customers_name, contracts_fromdate, contracts_todate, contracts_maxkm," +
+                " contracts_startkm, c.cars_license_plate, cb.car_brand, cm.car_models_name, cm.car_models_fueltype," +
+                " cm.cars_type FROM" +
+                " contracts " +
+                "JOIN customers cu on contracts.contracts_customer = cu.customers_id " +
+                "JOIN cars c on c.cars_id = contracts.contracts_cars_id " +
+                "JOIN car_models cm on c.cars_model_id = cm.car_models_id " +
+                "JOIN car_brands cb on cb.car_brand_id = cm.car_models_brand_id " +
+                "WHERE cu.customers_id = ?;";
+        RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
+        return jdbcTemplate.query(sql,rowMapper, id);
+
+    }
+
+
+        /**
+         *
+         * @param customer
+         * @return
+         */
     public Customer addCustomer(Customer customer){
         String sqlZipCity = "INSERT INTO zipcity (zip_id, zip, city, country) VALUES (DEFAULT, ?, ?, 'Denmark')";
 
@@ -70,17 +92,17 @@ public class CustomerRepo {
         return null;
     }
 
-    /**
-     *
-     * @param id
-     * @return
-     */
-    public Customer findCustomerByID(int id){
-        String sqlFindCustomerById = "SELECT * FROM customers WHERE customers_id = ?";
-        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
-        Customer customer = jdbcTemplate.queryForObject(sqlFindCustomerById, rowMapper, id);
-        return customer;
-    }
+//    /**
+//     *
+//     * @param id
+//     * @return
+//     */
+//    public Customer findCustomerByID(int id){
+//        String sqlFindCustomerById = "SELECT * FROM customers WHERE customers_id = ?";
+//        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+//        Customer customer = jdbcTemplate.queryForObject(sqlFindCustomerById, rowMapper, id);
+//        return customer;
+//    }
 
     public List<Customer> searchForCustomer(String search){
         String sql = "SELECT customers_id, customers_name, customers_mobile, customers_phone, customers_email, customers_drivers_license, customers_drivers_license_issuedate, customers_drivers_license_expiredate, address_street, address_number, address_floor, zip, city, country FROM kailua_cars.customers inner join address on address_id = customers_address inner join zipcity on address_zip = zip_id WHERE customers_name LIKE \"%" + search + "%\";";

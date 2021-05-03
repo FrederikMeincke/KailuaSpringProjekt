@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contract List</title>
+    <link rel="stylesheet" type="text/css" href="MyCSS.css">
+</head>
+<body>
+<h1>
+    Contract list
+</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: right">Contract ID</th>
+        <th>Name</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Allowed km</th>
+        <th>Km at start</th>
+        <th>License plate</th>
+        <th>Car brand</th>
+        <th>Car model</th>
+        <th>Car fuel type</th>
+        <th>Car type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Display all customers information-->
+    <tr th:each="contract:${contractList}">
+        <td th:text="${contract.contracts_id}"/>
+        <td th:text="${contract.customers_name}"/>
+        <td th:text="${contract.contracts_fromdate}"/>
+        <td th:text="${contract.contracts_todate}"/>
+        <td th:text="${contract.contracts_maxkm}"/>
+        <td th:text="${contract.contracts_startkm}"/>
+        <td th:text="${contract.cars_license_plate}"/>
+        <td th:text="${contract.car_brand}"/>
+        <td th:text="${contract.car_models_name}"/>
+        <td th:text="${contract.car_models_fueltype}"/>
+        <td th:text="${contract.cars_type}"/>
+
+        <td> <!-- todo buttons here?-->
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>
