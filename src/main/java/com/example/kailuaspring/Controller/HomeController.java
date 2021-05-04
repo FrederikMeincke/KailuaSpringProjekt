@@ -94,8 +94,8 @@ public class HomeController {
     }
 
     @PostMapping("/updateCustomer/{id}")
-    public String updateCustomer(@PathVariable("id") int id) {
-        customerService.updateCustomer(id);
+    public String updateCustomer(@PathVariable("id") int id, @ModelAttribute Customer customer) {
+        customerService.updateCustomer(id, customer);
         return "redirect:/";
     }
 

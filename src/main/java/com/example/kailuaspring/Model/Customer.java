@@ -18,7 +18,9 @@ public class Customer {
     private String address_street;
     private String address_number;
     private String address_floor;
+    private int addressId;
     private int zip;
+    private int zipId;
     private String city;
     private String country;
 
@@ -28,7 +30,7 @@ public class Customer {
     public Customer(int customers_id, String customers_name, int customers_mobile, int customers_phone,
                     String customers_email, String customers_drivers_license, String customers_drivers_license_issuedate,
                     String customers_drivers_license_expiredate, String address_street, String address_number,
-                    String address_floor, int zip, String city, String country) {
+                    String address_floor, int addressId, int zip, int zipId, String city, String country) {
         this.customers_id = customers_id;
         this.customers_name = customers_name;
         this.customers_mobile = customers_mobile;
@@ -40,7 +42,9 @@ public class Customer {
         this.address_street = address_street;
         this.address_number = address_number;
         this.address_floor = address_floor;
+        this.addressId = addressId;
         this.zip = zip;
+        this.zipId = zipId;
         this.city = city;
         this.country = country;
     }
@@ -156,5 +160,21 @@ public class Customer {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public int getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
+    }
+
+    public int getZipId() {
+        return zipId;
+    }
+
+    public void setZipId(int zipId) {
+        this.zipId = zipId;
     }
 }

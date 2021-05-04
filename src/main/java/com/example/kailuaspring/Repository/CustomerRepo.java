@@ -3,6 +3,7 @@ package com.example.kailuaspring.Repository;
 import com.example.kailuaspring.Model.Contract;
 import com.example.kailuaspring.Model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import javax.sql.RowSet;
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -26,7 +28,7 @@ public class CustomerRepo {
     public List<Customer> fetchAllCustomers(){
         String sql = "SELECT customers_id, customers_name, customers_mobile, customers_phone, customers_email," +
                 " customers_drivers_license, customers_drivers_license_issuedate, customers_drivers_license_expiredate," +
-                " address_street, address_number, address_floor, zip, city, country" +
+                " address_street, address_number, address_floor, zip, city, country, zip_id, address_id" +
                 " FROM kailua_cars.customers " +
                 "inner join address on address_id = customers_address " +
                 "inner join zipcity on address_zip = zip_id;";
@@ -139,8 +141,42 @@ public class CustomerRepo {
      * @param id
      * @return
      */
-    public Customer updateCustomer(int id){
-        return null;
+    public void updateCustomer(int id, Customer tCustomer){
+        Customer customer = findCustomerByID(id);
+        int zipId = customer.getZipId();
+        int addressId = customer.getAddressId();
+        try {
+            String sqlzip = "UPDATE zipcity " +
+            "SET zip = ?, city = ?, country = ? " +
+            "WHERE zip_id  in " +
+                    "(SELECT * FROM (SELECT zip_id " +
+                            "FROM zipcity " +
+                            "JOIN address a on zipcity.zip_id = a.address_zip " +
+                            "WHERE address_id = ?)tbltemp); ";
+            jdbcTemplate.update(sqlzip,tCustomer.getZip(), tCustomer.getCity(), tCustomer.getCountry(),zipId);
+
+            String addresssql = "UPDATE address " +
+                    "SET address_street = ?, address_number = ?, address_floor = ? " +
+                    "WHERE address_id in " +
+                    "      (SELECT * FROM(SELECT address_id " +
+                    "                     FROM address " +
+                    "                              JOIN customers c on address_id = c.customers_address " +
+                    "                     WHERE c.customers_id = ?)tbltemp);";
+            jdbcTemplate.update(addresssql,tCustomer.getAddress_street(),tCustomer.getAddress_number(),
+                    tCustomer.getAddress_floor(), addressId);
+
+            String customersql ="UPDATE customers as cu " +
+                    "SET cu.customers_name = ?, cu.customers_mobile = ?, cu.customers_phone = ?, cu.customers_email = ?, " +
+                    "    cu.customers_drivers_license = ?, " +
+                    "    cu.customers_drivers_license_issuedate = ?, cu.customers_drivers_license_expiredate = ? " +
+                    "WHERE cu.customers_id = ?;";
+            jdbcTemplate.update(customersql,tCustomer.getCustomers_name(), tCustomer.getCustomers_mobile(),
+                    tCustomer.getCustomers_phone(),tCustomer.getCustomers_email(), tCustomer.getCustomers_drivers_license(),
+                    tCustomer.getCustomers_drivers_license_issuedate(), tCustomer.getCustomers_drivers_license_expiredate(),id);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
