@@ -128,10 +128,9 @@ public class CustomerRepo {
     /**
      *
      * @param id
-     * @param customer
      * @return
      */
-    public Customer updateCustomer(int id, Customer customer){
+    public Customer updateCustomer(int id){
         return null;
     }
 

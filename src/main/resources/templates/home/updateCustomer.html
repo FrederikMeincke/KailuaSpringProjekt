@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Update Customer</title>
+  <link rel="stylesheet" type="text/css" href="MyCSS.css">
+</head>
+<body>
+
+<h1>Sup fuckser</h1>
+
+<form id="newCustomer" action="/updateCustomer" method="post">
+  <label>Full Name</label>
+  <br>
+  <input class="labelcss" type="text" name="customers_name" th:value="${customers.customers_name}">
+  <br><br>
+  <label>Mobile No.</label>
+  <br>
+  <input class="labelcss" type="text" name="customers_mobile" placeholder="I.e. 42042069">
+  <br><br>
+  <label>Phone No.</label>
+  <br>
+  <input class="labelcss" type="text" name="customers_phone" placeholder="I.e. 69420420">
+  <br><br>
+  <label>E-mail</label>
+  <br>
+  <input class="labelcss" type="text" name="customers_email" placeholder="I.e. your@email.com">
+  <br><br>
+  <label>Drivers license Number.</label>
+  <br>
+  <input class="labelcss" type="text" name="customers_drivers_license" placeholder="I.e. XY11111Z">
+  <br><br>
+  <label>Drivers License issue date</label>
+  <br>
+  <input class="labelcss" type="date" id="issuedate" name="customers_drivers_license_issuedate">
+  <br><br>
+  <label>Drivers License expire date</label>
+  <br>
+  <input class="labelcss" type="date" id="expiredate" name="customers_drivers_license_expiredate">
+  <br><br>
+  <label>Street Name</label>
+  <br>
+  <input class="labelcss" type="text" name="address_street" placeholder="I.e. Kailua Corner">
+  <br><br>
+  <label>Street No.</label>
+  <br>
+  <input class="labelcss" type="text" name="address_number" placeholder="I.e. '69'">
+  <br><br>
+  <label>Floor</label>
+  <br>
+  <input class="labelcss" type="text" name="address_floor" placeholder="I.e. 3th">
+  <br><br>
+  <label>City</label>
+  <br>
+  <input class="labelcss" type="text" name="city" placeholder="I.e. Kailua Ville">
+  <br><br>
+  <label>Zip</label>
+  <br>
+  <input class="labelcss" type="text" name="zip" placeholder="I.e. 42069">
+  <br><br>
+
+  <input class="button1 button3" type="submit" value="Add New Customer">
+</form>
+
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.example.kailuaspring.Controller;
 import com.example.kailuaspring.Model.Contract;
 import com.example.kailuaspring.Model.Customer;
 import com.example.kailuaspring.Service.CustomerService;
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -85,6 +86,17 @@ public class HomeController {
         } else {
             return "redirect:/";
         }
+    }
+
+    @GetMapping("/updateCustomer/{id}")
+    public String updateCustomer(@PathVariable("id") int id) {
+
+        return "home/updateCustomer";
+    }
+
+    @PostMapping("/updateCustomer")
+    public String updateCustomer(@ModelAttribute("id") int id, Model model) {
+        customerService.updateCustomer(id);
     }
 
 //    @GetMapping("showContract/{id}")
