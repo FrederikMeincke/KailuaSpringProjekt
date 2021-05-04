@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Update Customer</title>
-  <link rel="stylesheet" type="text/css" href="MyCSS.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Update Customer</title>
+    <link rel="stylesheet" type="text/css" href="../MyCSS.css">
 </head>
 <body>
 
-<h1>Sup fuckser</h1>
+<!-- Menu Bar -->
+<div class="topnav">
+  <a class="active" href="/">Home</a>
+  <a href="/showAllCustomers">Customers</a>
+  <a href="/showAllContracts">Contracts</a>
+  <a href="/showAllCars">Cars</a>
+</div>
+
+<h1>Update Customer</h1>
 
 <form id="newCustomer" th:href="@{'/updateCustomer/'+${customer.customers_id}}" method="post">
   <label>Full Name</label>

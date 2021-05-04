@@ -70,30 +70,6 @@
     color: white;
 }
 
-.btn-show {
-    background-image: image('view.png');
-}
-
-#btn-show {
-    background-image: image('view.png');
-}
-
-.btn-update {
-    background-image: image('edit.png');
-}
-
-#btn-update {
-    background-image: image('edit.png');
-}
-
-.btn-delete {
-    background-image: image('delete.png');
-}
-
-#btn-delete {
-    background-image: image('delete.png');
-}
-
 /* Adds a black background color to the top navigation */
 .topnav {
     background-color: #333;
