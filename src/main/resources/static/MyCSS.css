@@ -39,7 +39,7 @@
     background-color: #008cba;
     border: none;
     color: white;
-    padding: 12px 24px;
+    padding: 10px 20px;
     text-align: center;
     display: inline-block;
     margin: 4px 2px;
@@ -85,5 +85,14 @@
 .topnav a.active {
     background-color: #0475aa;
     color: white;
+}
+
+#issuedate, #expiredate {
+    width: 172px;
+    height: 21px;
+}
+
+#newCustomer {
+
 }
 
