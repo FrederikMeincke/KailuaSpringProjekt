@@ -69,17 +69,19 @@
         <td th:text="${customers.country}"/>
 
         <td>
+
             <a th:href="@{'/showContracts/'+${customers.customers_id}}">
-                <button class="btn-show" id="show-contract">Show contracts</button>
+                <button class="btn-show" id="show-contract" title="Show Contracts"><img src="view.png" alt="Show Contracts" width="25px" height="25px"></button>
             </a>
 
             <a th:href="@{'/updateCustomer/'+${customers.customers_id}}">
-                <button class="btn-update" id="btn-update">Update Customer</button>
+                <button class="btn-update" id="btn-update" title="Edit Customer"><img src="edit.png" alt="Edit Customer" width="25px" height="25px"></button>
             </a>
 
             <a th:href="@{'/delete/'+${customers.customers_id}}">
-                <button class="btn-delete" id="btn-delete">Delete Customer</button>
+                <button class="btn-delete" id="btn-delete" title="Delete Customer"><img src="delete.png" alt="Delete Customer" width="25px" height="25px"></button>
             </a>
+
         </td>
     </tr>
     </tbody>
