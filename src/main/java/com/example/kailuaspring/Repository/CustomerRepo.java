@@ -105,7 +105,7 @@ public class CustomerRepo {
         String sqlFindCustomerById = "SELECT customers_id, customers_name, customers_mobile, customers_phone," +
                 " customers_email, customers_drivers_license, customers_drivers_license_issuedate," +
                 " customers_drivers_license_expiredate, address_street, address_number, address_floor, zip, city," +
-                " country" +
+                " country, zip_id, address_id" +
                 " FROM kailua_cars.customers" +
                 " inner join address on address_id = customers_address" +
                 " inner join zipcity on address_zip = zip_id" +
@@ -143,25 +143,20 @@ public class CustomerRepo {
      */
     public void updateCustomer(int id, Customer tCustomer){
         Customer customer = findCustomerByID(id);
-        int zipId = customer.getZipId();
-        int addressId = customer.getAddressId();
+        int zipId = customer.getZip_id();
+        int addressId = customer.getAddress_id();
+        System.out.println("Zip: " + zipId +"\n" +
+                "address: " + addressId + "\n" +
+                "customer: " + customer.getCustomers_email());
         try {
             String sqlzip = "UPDATE zipcity " +
-            "SET zip = ?, city = ?, country = ? " +
-            "WHERE zip_id  in " +
-                    "(SELECT * FROM (SELECT zip_id " +
-                            "FROM zipcity " +
-                            "JOIN address a on zipcity.zip_id = a.address_zip " +
-                            "WHERE address_id = ?)tbltemp); ";
-            jdbcTemplate.update(sqlzip,tCustomer.getZip(), tCustomer.getCity(), tCustomer.getCountry(),zipId);
+            "SET zip = ?, city = ? " +
+            "WHERE zip_id  = ?; ";
+            jdbcTemplate.update(sqlzip,tCustomer.getZip(), tCustomer.getCity(),zipId);
 
             String addresssql = "UPDATE address " +
                     "SET address_street = ?, address_number = ?, address_floor = ? " +
-                    "WHERE address_id in " +
-                    "      (SELECT * FROM(SELECT address_id " +
-                    "                     FROM address " +
-                    "                              JOIN customers c on address_id = c.customers_address " +
-                    "                     WHERE c.customers_id = ?)tbltemp);";
+                    "WHERE address_id = ?;";
             jdbcTemplate.update(addresssql,tCustomer.getAddress_street(),tCustomer.getAddress_number(),
                     tCustomer.getAddress_floor(), addressId);
 
