@@ -1,3 +1,14 @@
+.h1 {
+    text-align: center;
+    font-family: sans-serif;
+    padding-bottom: 1px;
+}
+
+.h1-1 {
+    font-family: sans-serif;
+    padding-bottom: 1px;
+}
+
 #pagecss {
     font-family: Arial, sans-serif;
     border-collapse: collapse;
@@ -22,17 +33,13 @@
     color: #ffffff;
 }
 
-#searchidname {
+.search-id-name {
     float: right;
     margin-top: 8px;
     margin-bottom: 8px;
     margin-right: 8px;
     border: none;
     font-size: 20px;
-}
-
-#newCustomer {
-
 }
 
 .button1 {
@@ -48,25 +55,51 @@
     transition-duration: 0.4s;
 }
 
-.button2 {
+.button-anc {
     background-color: white;
     color: black;
     border: 1px solid #008cba;
+    margin-left: 0%;
 }
 
-.button2:hover {
+.button-anc:hover {
     background-color: #008cba;
     color: white;
 }
 
-.button3 {
+
+.button-add-new-customer {
     background-color: white;
     color: black;
     border: 1px solid #e7e7e7;
 }
 
-.button3:hover {
+.button-add-new-customer:hover {
     background-color: #555555;
+    color: white;
+}
+
+.button4 {
+    background-color: #008cba;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    margin: 4px 2px;
+    font-size: 16px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.button5 {
+    background-color: white;
+    color: black;
+    border: 1px solid #008cba;
+}
+
+.button5:hover {
+    background-color: #008cba;
     color: white;
 }
 
