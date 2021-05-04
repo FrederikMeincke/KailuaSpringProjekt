@@ -73,12 +73,12 @@
                 <button class="btn-show" id="show-contract">Show contracts</button>
             </a>
 
-            <a th:href="@{'/delete/'+${customers.customers_id}}">
-                <button class="btn-delete" id="btn-delete">Delete Customer</button>
-            </a>
-
             <a th:href="@{'/updateCustomer/'+${customers.customers_id}}">
                 <button class="btn-update" id="btn-update">Update Customer</button>
+            </a>
+
+            <a th:href="@{'/delete/'+${customers.customers_id}}">
+                <button class="btn-delete" id="btn-delete">Delete Customer</button>
             </a>
         </td>
     </tr>
