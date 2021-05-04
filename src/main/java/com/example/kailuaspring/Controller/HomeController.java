@@ -68,7 +68,6 @@ public class HomeController {
 //        return "home/findCustomer";
 //    }
 
-
     @PostMapping("/searchForCustomer")
     public String searchForCustomer(Model model, String search) {
         List<Customer> customerList = customerService.searchForCustomer(search);
