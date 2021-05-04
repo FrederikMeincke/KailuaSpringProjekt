@@ -25,7 +25,7 @@ public class CustomerRepo {
      */
     public List<Customer> fetchAllCustomers(){
         String sql = "SELECT customers_id, customers_name, customers_mobile, customers_phone, customers_email," +
-                " customers_drivers_license, customers_drivers_license_issuedate, customers_drivers_license_expiredate" +
+                " customers_drivers_license, customers_drivers_license_issuedate, customers_drivers_license_expiredate," +
                 " address_street, address_number, address_floor, zip, city, country" +
                 " FROM kailua_cars.customers " +
                 "inner join address on address_id = customers_address " +
