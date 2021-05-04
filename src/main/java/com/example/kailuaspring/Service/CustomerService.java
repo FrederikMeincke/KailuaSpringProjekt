@@ -33,9 +33,9 @@ public class CustomerService {
         return customerRepo.addCustomer(customer);
     }
 
-//    public Customer findCustomerByID(int id){
-//        return customerRepo.findCustomerByID(id);
-//    }
+    public Customer findCustomerByID(int id){
+        return customerRepo.findCustomerByID(id);
+    }
 
     public List<Customer> searchForCustomer(String name){
         return customerRepo.searchForCustomer(name);

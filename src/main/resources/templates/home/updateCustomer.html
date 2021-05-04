@@ -10,57 +10,57 @@
 
 <h1>Sup fuckser</h1>
 
-<form id="newCustomer" action="/updateCustomer" method="post">
+<form id="newCustomer" th:href="@{'/updateCustomer/'+${customer.customers_id}}" method="post">
   <label>Full Name</label>
   <br>
-  <input class="labelcss" type="text" name="customers_name" th:value="${customers.customers_name}">
+  <input class="labelcss" type="text" name="customers_name" th:value="${customer.customers_name}">
   <br><br>
   <label>Mobile No.</label>
   <br>
-  <input class="labelcss" type="text" name="customers_mobile" placeholder="I.e. 42042069">
+  <input class="labelcss" type="text" name="customers_mobile" th:value="${customer.customers_mobile}">
   <br><br>
   <label>Phone No.</label>
   <br>
-  <input class="labelcss" type="text" name="customers_phone" placeholder="I.e. 69420420">
+  <input class="labelcss" type="text" name="customers_phone" th:value="${customer.customers_phone}">
   <br><br>
   <label>E-mail</label>
   <br>
-  <input class="labelcss" type="text" name="customers_email" placeholder="I.e. your@email.com">
+  <input class="labelcss" type="text" name="customers_email" th:value="${customer.customers_email}">
   <br><br>
   <label>Drivers license Number.</label>
   <br>
-  <input class="labelcss" type="text" name="customers_drivers_license" placeholder="I.e. XY11111Z">
+  <input class="labelcss" type="text" name="customers_drivers_license" th:value="${customer.customers_drivers_license}">
   <br><br>
   <label>Drivers License issue date</label>
   <br>
-  <input class="labelcss" type="date" id="issuedate" name="customers_drivers_license_issuedate">
+  <input class="labelcss" type="date" id="issuedate" name="customers_drivers_license_issuedate" th:value="${customer.customers_drivers_license_issuedate}">
   <br><br>
   <label>Drivers License expire date</label>
   <br>
-  <input class="labelcss" type="date" id="expiredate" name="customers_drivers_license_expiredate">
+  <input class="labelcss" type="date" id="expiredate" name="customers_drivers_license_expiredate" th:value="${customer.customers_drivers_license_expiredate}">
   <br><br>
   <label>Street Name</label>
   <br>
-  <input class="labelcss" type="text" name="address_street" placeholder="I.e. Kailua Corner">
+  <input class="labelcss" type="text" name="address_street" placeholder="I.e. Kailua Corner" th:value="${customer.address_street}">
   <br><br>
   <label>Street No.</label>
   <br>
-  <input class="labelcss" type="text" name="address_number" placeholder="I.e. '69'">
+  <input class="labelcss" type="text" name="address_number" placeholder="I.e. '69'" th:value="${customer.address_number}">
   <br><br>
   <label>Floor</label>
   <br>
-  <input class="labelcss" type="text" name="address_floor" placeholder="I.e. 3th">
+  <input class="labelcss" type="text" name="address_floor" placeholder="I.e. 3th" th:value="${customer.address_floor}">
   <br><br>
   <label>City</label>
   <br>
-  <input class="labelcss" type="text" name="city" placeholder="I.e. Kailua Ville">
+  <input class="labelcss" type="text" name="city" placeholder="I.e. Kailua Ville" th:value="${customer.city}">
   <br><br>
   <label>Zip</label>
   <br>
-  <input class="labelcss" type="text" name="zip" placeholder="I.e. 42069">
+  <input class="labelcss" type="text" name="zip" placeholder="I.e. 42069" th:value="${customer.zip}">
   <br><br>
 
-  <input class="button1 button3" type="submit" value="Add New Customer">
+  <input class="button1 button3" type="submit" value="Update customer">
 </form>
 
 </body>

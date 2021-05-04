@@ -2,6 +2,7 @@ package com.example.kailuaspring.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDate;
 
 @Entity
 public class Customer {

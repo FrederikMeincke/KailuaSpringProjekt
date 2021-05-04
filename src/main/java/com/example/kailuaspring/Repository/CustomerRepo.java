@@ -24,7 +24,13 @@ public class CustomerRepo {
      * @return
      */
     public List<Customer> fetchAllCustomers(){
-        String sql = "SELECT customers_id, customers_name, customers_mobile, customers_phone, customers_email, customers_drivers_license, customers_drivers_license_issuedate, customers_drivers_license_expiredate, address_street, address_number, address_floor, zip, city, country FROM kailua_cars.customers inner join address on address_id = customers_address inner join zipcity on address_zip = zip_id;";
+        String sql = "SELECT customers_id, customers_name, customers_mobile, customers_phone, customers_email," +
+                " customers_drivers_license, customers_drivers_license_issuedate, customers_drivers_license_expiredate" +
+                " address_street, address_number, address_floor, zip, city, country" +
+                " FROM kailua_cars.customers " +
+                "inner join address on address_id = customers_address " +
+                "inner join zipcity on address_zip = zip_id;";
+
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         return jdbcTemplate.query(sql,rowMapper);
     }
@@ -84,25 +90,28 @@ public class CustomerRepo {
                 "customers_drivers_license, customers_drivers_license_issuedate, customers_drivers_license_expiredate) " +
                 "VALUES (DEFAULT," + addressInt + ",?,?,?,?,?,?,?)";
 
-        //RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
-
-
-
         jdbcTemplate.update(sqlCustomer,customer.getCustomers_name(),customer.getCustomers_mobile(),customer.getCustomers_phone(),customer.getCustomers_email(),customer.getCustomers_drivers_license(),customer.getCustomers_drivers_license_issuedate(),customer.getCustomers_drivers_license_expiredate());
         return null;
     }
 
-//    /**
-//     *
-//     * @param id
-//     * @return
-//     */
-//    public Customer findCustomerByID(int id){
-//        String sqlFindCustomerById = "SELECT * FROM customers WHERE customers_id = ?";
-//        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
-//        Customer customer = jdbcTemplate.queryForObject(sqlFindCustomerById, rowMapper, id);
-//        return customer;
-//    }
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public Customer findCustomerByID(int id){
+        String sqlFindCustomerById = "SELECT customers_id, customers_name, customers_mobile, customers_phone," +
+                " customers_email, customers_drivers_license, customers_drivers_license_issuedate," +
+                " customers_drivers_license_expiredate, address_street, address_number, address_floor, zip, city," +
+                " country" +
+                " FROM kailua_cars.customers" +
+                " inner join address on address_id = customers_address" +
+                " inner join zipcity on address_zip = zip_id" +
+                " WHERE customers_id = ?;";
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+        Customer customer = jdbcTemplate.queryForObject(sqlFindCustomerById, rowMapper, id);
+        return customer;
+    }
 
     public List<Customer> searchForCustomer(String search){
         String sql = "SELECT customers_id, customers_name, customers_mobile, customers_phone, customers_email, customers_drivers_license, customers_drivers_license_issuedate, customers_drivers_license_expiredate, address_street, address_number, address_floor, zip, city, country FROM kailua_cars.customers inner join address on address_id = customers_address inner join zipcity on address_zip = zip_id WHERE customers_name LIKE \"%" + search + "%\";";
