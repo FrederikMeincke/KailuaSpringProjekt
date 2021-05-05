@@ -18,25 +18,23 @@
 
 <h1>Search results</h1>
 <!-- Search Bar -->
- <div class="search-id-name">
-     <form name="search" method="post" action="/searchForCustomer">
-         <input type="text" name="search" placeholder="Search here...">
-         <!--todo:lav knap med forstørrelsesglas icon-->
-         <input type="submit" value="search"/>
+<div class="search-id-name">
+    <form name="search" method="post" action="/searchForCustomer">
+        <input type="text" name="search" placeholder="Search here...">
+        <!--todo:lav knap med forstørrelsesglas icon-->
+        <input type="submit" value="Search"/>
+        <!--todo:lav knap med kryds icon-->
+        <a href="/showAllCustomers">
+            <button>Reset filter</button>
+        </a>
+    </form>
+</div>
+<br>
 
-         <!--todo:lav knap med kryds icon-->
-         <a href="/showAllCustomers">
-             <button>Reset filter</button>
-         </a>
-
-         <br>
-     </form>
- </div>
-
-    <table id="pagecss">
+<table id="pagecss">
         <thead>
         <tr>
-            <th style="text-align: right">ID</th>
+            <th>ID</th>
             <th>Name</th>
             <th>Mobile no.</th>
             <th>Phone no.</th>
