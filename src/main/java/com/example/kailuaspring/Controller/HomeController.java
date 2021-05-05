@@ -1,5 +1,6 @@
 package com.example.kailuaspring.Controller;
 
+import com.example.kailuaspring.Model.Car;
 import com.example.kailuaspring.Model.Contract;
 import com.example.kailuaspring.Model.Customer;
 import com.example.kailuaspring.Service.CustomerService;
@@ -34,6 +35,8 @@ public class HomeController {
 
     @GetMapping("/showAllCars")
     public String showAllCars(Model model){
+        List<Car> carList = customerService.fetchAllCars();
+        model.addAttribute("carList", carList);
         return "home/showAllCars";
     }
 

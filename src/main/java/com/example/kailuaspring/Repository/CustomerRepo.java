@@ -1,5 +1,6 @@
 package com.example.kailuaspring.Repository;
 
+import com.example.kailuaspring.Model.Car;
 import com.example.kailuaspring.Model.Contract;
 import com.example.kailuaspring.Model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import javax.sql.RowSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
 
 @Repository
@@ -48,6 +50,15 @@ public class CustomerRepo {
                 "JOIN car_brands cb on cb.car_brand_id = cm.car_models_brand_id;";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         return jdbcTemplate.query(sql,rowMapper);
+    }
+
+    public List<Car> fetchAllCars() {
+        String sql = "SELECT cars_id, car_brand, car_models_name, car_models_fueltype, cars_type, cars_license_plate, " +
+                "cars_first_reg, cars_current_km FROM cars" +
+                "    join car_models cm on cars.cars_model_id = cm.car_models_id" +
+                "    join car_brands cb on cm.car_models_brand_id = cb.car_brand_id;";
+        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
+        return jdbcTemplate.query(sql, rowMapper);
     }
 
     public List<Contract> searchForContractsByCustomer(int id) {

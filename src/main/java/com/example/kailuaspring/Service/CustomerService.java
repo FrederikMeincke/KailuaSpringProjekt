@@ -1,5 +1,6 @@
 package com.example.kailuaspring.Service;
 
+import com.example.kailuaspring.Model.Car;
 import com.example.kailuaspring.Model.Contract;
 import com.example.kailuaspring.Model.Customer;
 import com.example.kailuaspring.Repository.CustomerRepo;
@@ -24,6 +25,9 @@ public class CustomerService {
         return customerRepo.fetchAllContracts();
     }
 
+    public List<Car> fetchAllCars() {
+        return customerRepo.fetchAllCars();
+    }
     public List<Contract> findContractsByCustomer(int id) {
         return customerRepo.searchForContractsByCustomer(id);
 

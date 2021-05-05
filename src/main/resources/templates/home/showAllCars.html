@@ -18,5 +18,33 @@
 
 <h1>Car List</h1>
 
+<table id="pagecss">
+    <thead>
+    <tr>
+        <th>Car ID</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Fuel Type</th>
+        <th>Car Type</th>
+        <th>License Plate</th>
+        <th>First Register Date</th>
+        <th>Current KM</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Display all car information-->
+    <tr th:each="car:${carList}">
+        <td th:text="${car.cars_id}"/>
+        <td th:text="${car.car_brand}"/>
+        <td th:text="${car.car_models_name}"/>
+        <td th:text="${car.car_models_fueltype}"/>
+        <td th:text="${car.cars_type}"/>
+        <td th:text="${car.cars_license_plate}"/>
+        <td th:text="${car.cars_first_reg}"/>
+        <td th:text="${car.cars_current_km}"/>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>
