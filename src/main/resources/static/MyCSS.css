@@ -122,7 +122,14 @@
     color: #000000;
 }
 
+.topnav a.notactive {
+    font-family: sans-serif;
+    background-color: #333;
+    color: #ffffff;
+}
+
 .topnav a.active {
+    font-family: sans-serif;
     background-color: #0475aa;
     color: #ffffff;
 }

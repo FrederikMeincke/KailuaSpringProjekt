@@ -10,10 +10,10 @@
 
 <!-- Menu Bar -->
 <div class="topnav">
-    <a class="active" href="/">Home</a>
-    <a href="/showAllCustomers">Customers</a>
-    <a href="/showAllContracts">Contracts</a>
-    <a href="/showAllCars">Cars</a>
+    <a class="notactive" href="/">Home</a>
+    <a class="active" href="/showAllCustomers">Customers</a>
+    <a class="notactive" href="/showAllContracts">Contracts</a>
+    <a class="notactive" href="/showAllCars">Cars</a>
 </div>
 
 <h1>Search results</h1>
@@ -21,7 +21,14 @@
  <div class="search-id-name">
      <form name="search" method="post" action="/searchForCustomer">
          <input type="text" name="search" placeholder="Search here...">
+         <!--todo:lav knap med forstørrelsesglas icon-->
          <input type="submit" value="search"/>
+
+         <!--todo:lav knap med kryds icon-->
+         <a href="/showAllCustomers">
+             <button>Reset filter</button>
+         </a>
+
          <br>
      </form>
  </div>
@@ -66,10 +73,5 @@
         </tr>
         </tbody>
     </table>
-
-<a href="/showAllCustomers">
-    <button class="button1 button2">Return to Customers</button>
-</a>
-
 </body>
 </html>

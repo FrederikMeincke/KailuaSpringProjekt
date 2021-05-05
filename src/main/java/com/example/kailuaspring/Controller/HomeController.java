@@ -50,7 +50,7 @@ public class HomeController {
     @PostMapping("/addNewCustomer")
     public String addNewCustomer(@ModelAttribute Customer customer){
         customerService.addCustomer(customer);
-        return "redirect:/";
+        return "redirect:/showAllCustomers";
     }
 
     @GetMapping("/updateCustomer/{id}")
@@ -63,7 +63,7 @@ public class HomeController {
     @PostMapping("/updateCustomer/{id}")
     public String updateCustomer(@PathVariable("id") int id, @ModelAttribute Customer customer) {
         customerService.updateCustomer(id, customer);
-        return "redirect:/";
+        return "redirect:/showAllCustomers";
     }
 
     @GetMapping("/deleteCustomer/{id}")
@@ -72,7 +72,7 @@ public class HomeController {
         if (deleted) {
             return "home/errorPage";
         } else {
-            return "redirect:/";
+            return "redirect:/showAllCustomers";
         }
     }
 
@@ -112,7 +112,7 @@ public class HomeController {
         if (deleted) {
             return "home/errorPage";
         } else {
-            return "redirect:/";
+            return "redirect:/showAllCars";
         }
     }
 
