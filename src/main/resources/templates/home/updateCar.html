@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Update Car</title>
+  <link rel="stylesheet" type="text/css" href="../MyCSS.css">
+</head>
+<body>
+
+<!-- Menu Bar -->
+<div class="topnav">
+  <a class="active" href="/">Home</a>
+  <a href="/showAllCustomers">Customers</a>
+  <a href="/showAllContracts">Contracts</a>
+  <a href="/showAllCars">Cars</a>
+</div>
+
+<h1 class="h1">Update Car</h1>
+
+<form th:href="@{'/updateCar/'+${car.cars_id}}" method="post">
+  <label>Brand</label>
+  <br>
+  <input class="labelcss" type="text" name="cars_brand" th:value="${car.car_brand}">
+  <br><br>
+  <label>Model</label>
+  <br>
+  <input class="labelcss" type="text" name="car_models_name" th:value="${car.car_models_name}">
+  <br><br>
+  <label>Fuel Type.</label>
+  <br>
+  <input class="labelcss" type="text" name="car_models_fueltype" th:value="${car.car_models_fueltype}">
+  <br><br>
+  <label>Car Type</label>
+  <br>
+  <input class="labelcss" type="text" name="cars_type" th:value="${car.cars_type}">
+  <br><br>
+  <label>License Plate</label>
+  <br>
+  <input class="labelcss" type="text" name="cars_license_plate" th:value="${car.cars_license_plate}">
+  <br><br>
+  <label>First Register Date</label>
+  <br>
+  <input class="labelcss" type="date" id="cars_first_reg" name="cars_first_reg" th:value="${car.cars_first_reg}">
+  <br><br>
+  <label>Current KM</label>
+  <br>
+  <input class="labelcss" type="text" id="cars_current_km" name="cars_current_km" th:value="${car.cars_current_km}">
+  <br><br>
+
+  <input class="button1 button3" type="submit" value="Update customer">
+</form>
+
+</body>
+</html>

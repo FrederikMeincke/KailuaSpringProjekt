@@ -5,6 +5,7 @@ import com.example.kailuaspring.Model.Contract;
 import com.example.kailuaspring.Model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -13,6 +14,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import javax.sql.RowSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -23,10 +25,7 @@ public class CustomerRepo {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    /**
-     *
-     * @return
-     */
+    //Customers
     public List<Customer> fetchAllCustomers(){
         String sql = "SELECT customers_id, customers_name, customers_mobile, customers_phone, customers_email," +
                 " customers_drivers_license, customers_drivers_license_issuedate, customers_drivers_license_expiredate," +
@@ -39,79 +38,6 @@ public class CustomerRepo {
         return jdbcTemplate.query(sql,rowMapper);
     }
 
-    public List<Contract> fetchAllContracts() {
-        String sql = "SELECT contracts_id, cu.customers_name, contracts_fromdate, contracts_todate, contracts_maxkm," +
-                " contracts_startkm, c.cars_license_plate, cb.car_brand, cm.car_models_name, cm.car_models_fueltype," +
-                " cm.cars_type FROM" +
-                " contracts " +
-                "JOIN customers cu on contracts.contracts_customer = cu.customers_id " +
-                "JOIN cars c on c.cars_id = contracts.contracts_cars_id " +
-                "JOIN car_models cm on c.cars_model_id = cm.car_models_id " +
-                "JOIN car_brands cb on cb.car_brand_id = cm.car_models_brand_id;";
-        RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
-        return jdbcTemplate.query(sql,rowMapper);
-    }
-
-    public List<Car> fetchAllCars() {
-        String sql = "SELECT cars_id, car_brand, car_models_name, car_models_fueltype, cars_type, cars_license_plate, " +
-                "cars_first_reg, cars_current_km FROM cars" +
-                "    join car_models cm on cars.cars_model_id = cm.car_models_id" +
-                "    join car_brands cb on cm.car_models_brand_id = cb.car_brand_id;";
-        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
-        return jdbcTemplate.query(sql, rowMapper);
-    }
-
-    public List<Contract> searchForContractsByCustomer(int id) {
-        String sql = "SELECT contracts_id, cu.customers_name, contracts_fromdate, contracts_todate, contracts_maxkm," +
-                " contracts_startkm, c.cars_license_plate, cb.car_brand, cm.car_models_name, cm.car_models_fueltype," +
-                " cm.cars_type FROM" +
-                " contracts " +
-                "JOIN customers cu on contracts.contracts_customer = cu.customers_id " +
-                "JOIN cars c on c.cars_id = contracts.contracts_cars_id " +
-                "JOIN car_models cm on c.cars_model_id = cm.car_models_id " +
-                "JOIN car_brands cb on cb.car_brand_id = cm.car_models_brand_id " +
-                "WHERE cu.customers_id = ?;";
-        RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
-        return jdbcTemplate.query(sql,rowMapper, id);
-
-    }
-
-
-        /**
-         *
-         * @param customer
-         * @return
-         */
-    public Customer addCustomer(Customer customer){
-        String sqlZipCity = "INSERT INTO zipcity (zip_id, zip, city, country) VALUES (DEFAULT, ?, ?, 'Denmark')";
-
-        jdbcTemplate.update(sqlZipCity, customer.getZip(), customer.getCity());
-        String sqlLastAddedZip = "SELECT zip_id FROM kailua_cars.zipcity ORDER BY zip_id DESC limit 1;";
-        SqlRowSet zip = jdbcTemplate.queryForRowSet(sqlLastAddedZip);
-        zip.next();
-        int zipInt = zip.getInt("zip_id");
-
-        String sqlAddress = "INSERT INTO address (address_id, address_zip, address_street, address_number, address_floor) VALUES (DEFAULT," + zipInt + ",?,?,?);";
-
-        jdbcTemplate.update(sqlAddress,customer.getAddress_street(),customer.getAddress_number(),customer.getAddress_floor());
-        String sqlLastAddedAddress = "SELECT address_id FROM kailua_cars.address ORDER BY address_id DESC limit 1;";
-        SqlRowSet adr = jdbcTemplate.queryForRowSet(sqlLastAddedAddress);
-        adr.next();
-        int addressInt = adr.getInt("address_id");
-
-        String sqlCustomer = "INSERT INTO customers (customers_id, customers_address ,customers_name, customers_mobile, customers_phone, customers_email, " +
-                "customers_drivers_license, customers_drivers_license_issuedate, customers_drivers_license_expiredate) " +
-                "VALUES (DEFAULT," + addressInt + ",?,?,?,?,?,?,?)";
-
-        jdbcTemplate.update(sqlCustomer,customer.getCustomers_name(),customer.getCustomers_mobile(),customer.getCustomers_phone(),customer.getCustomers_email(),customer.getCustomers_drivers_license(),customer.getCustomers_drivers_license_issuedate(),customer.getCustomers_drivers_license_expiredate());
-        return null;
-    }
-
-    /**
-     *
-     * @param id
-     * @return
-     */
     public Customer findCustomerByID(int id){
         String sqlFindCustomerById = "SELECT customers_id, customers_name, customers_mobile, customers_phone," +
                 " customers_email, customers_drivers_license, customers_drivers_license_issuedate," +
@@ -132,37 +58,41 @@ public class CustomerRepo {
         return jdbcTemplate.query(sql,rowMapper);
     }
 
-    /**
-     *
-     * @param id
-     * @return
-     */
-    public Boolean deleteCustomer(int id){
-        try {
-            String sql = "DELETE FROM customers WHERE customers_id = ?";
-            return jdbcTemplate.update(sql, id) < 0;
-        } catch (Exception e) {
-            return true;
-        }
+    public void addCustomer(Customer customer){
+        String sqlZipCity = "INSERT INTO zipcity (zip_id, zip, city, country) VALUES (DEFAULT, ?, ?, 'Denmark')";
 
+        jdbcTemplate.update(sqlZipCity, customer.getZip(), customer.getCity());
+        String sqlLastAddedZip = "SELECT zip_id FROM kailua_cars.zipcity ORDER BY zip_id DESC limit 1;";
+        SqlRowSet zip = jdbcTemplate.queryForRowSet(sqlLastAddedZip);
+        zip.next();
+        int zipInt = zip.getInt("zip_id");
+
+        String sqlAddress = "INSERT INTO address (address_id, address_zip, address_street, address_number, address_floor) VALUES (DEFAULT," + zipInt + ",?,?,?);";
+
+        jdbcTemplate.update(sqlAddress,customer.getAddress_street(),customer.getAddress_number(),customer.getAddress_floor());
+        String sqlLastAddedAddress = "SELECT address_id FROM kailua_cars.address ORDER BY address_id DESC limit 1;";
+        SqlRowSet adr = jdbcTemplate.queryForRowSet(sqlLastAddedAddress);
+        adr.next();
+        int addressInt = adr.getInt("address_id");
+
+        String sqlCustomer = "INSERT INTO customers (customers_id, customers_address ,customers_name, customers_mobile, customers_phone, customers_email, " +
+                "customers_drivers_license, customers_drivers_license_issuedate, customers_drivers_license_expiredate) " +
+                "VALUES (DEFAULT," + addressInt + ",?,?,?,?,?,?,?)";
+
+        jdbcTemplate.update(sqlCustomer,customer.getCustomers_name(),customer.getCustomers_mobile(),
+                customer.getCustomers_phone(),customer.getCustomers_email(),customer.getCustomers_drivers_license(),
+                customer.getCustomers_drivers_license_issuedate(),customer.getCustomers_drivers_license_expiredate());
     }
 
-    /**
-     *
-     * @param id
-     * @return
-     */
     public void updateCustomer(int id, Customer tCustomer){
         Customer customer = findCustomerByID(id);
         int zipId = customer.getZip_id();
         int addressId = customer.getAddress_id();
-        System.out.println("Zip: " + zipId +"\n" +
-                "address: " + addressId + "\n" +
-                "customer: " + customer.getCustomers_email());
+
         try {
             String sqlzip = "UPDATE zipcity " +
-            "SET zip = ?, city = ? " +
-            "WHERE zip_id  = ?; ";
+                    "SET zip = ?, city = ? " +
+                    "WHERE zip_id  = ?; ";
             jdbcTemplate.update(sqlzip,tCustomer.getZip(), tCustomer.getCity(),zipId);
 
             String addresssql = "UPDATE address " +
@@ -185,4 +115,113 @@ public class CustomerRepo {
 
     }
 
-}
+    public boolean deleteCustomer(int id){
+        try {
+            String sql = "DELETE FROM customers WHERE customers_id = ?";
+            return jdbcTemplate.update(sql, id) < 0;
+        } catch (DataIntegrityViolationException e) {
+            return true;
+        }
+
+    }
+
+    //Contracts
+
+    public List<Contract> fetchAllContracts() {
+        String sql = "SELECT contracts_id, cu.customers_name, contracts_fromdate, contracts_todate, contracts_maxkm," +
+                " contracts_startkm, c.cars_license_plate, cb.car_brand, cm.car_models_name, cm.car_models_fueltype," +
+                " cm.cars_type FROM" +
+                " contracts " +
+                "JOIN customers cu on contracts.contracts_customer = cu.customers_id " +
+                "JOIN cars c on c.cars_id = contracts.contracts_cars_id " +
+                "JOIN car_models cm on c.cars_model_id = cm.car_models_id " +
+                "JOIN car_brands cb on cb.car_brand_id = cm.car_models_brand_id;";
+        RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
+        return jdbcTemplate.query(sql,rowMapper);
+    }
+
+    public Contract findContractByID(int id) {
+        String sql = "SELECT contracts_id, cu.customers_name, contracts_fromdate, contracts_todate, contracts_maxkm," +
+                " contracts_startkm, c.cars_license_plate, cb.car_brand, cm.car_models_name, cm.car_models_fueltype," +
+                " cm.cars_type FROM" +
+                " contracts " +
+                "JOIN customers cu on contracts.contracts_customer = cu.customers_id " +
+                "JOIN cars c on c.cars_id = contracts.contracts_cars_id " +
+                "JOIN car_models cm on c.cars_model_id = cm.car_models_id " +
+                "JOIN car_brands cb on cb.car_brand_id = cm.car_models_brand_id " +
+                "WHERE contracts_id = ?;";
+        RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
+        Contract contract = jdbcTemplate.queryForObject(sql, rowMapper, id);
+        return contract;
+    }
+
+    public List<Contract> searchForContractsByCustomer(int id) {
+        String sql = "SELECT contracts_id, cu.customers_name, contracts_fromdate, contracts_todate, contracts_maxkm," +
+                " contracts_startkm, c.cars_license_plate, cb.car_brand, cm.car_models_name, cm.car_models_fueltype," +
+                " cm.cars_type FROM" +
+                " contracts " +
+                "JOIN customers cu on contracts.contracts_customer = cu.customers_id " +
+                "JOIN cars c on c.cars_id = contracts.contracts_cars_id " +
+                "JOIN car_models cm on c.cars_model_id = cm.car_models_id " +
+                "JOIN car_brands cb on cb.car_brand_id = cm.car_models_brand_id " +
+                "WHERE cu.customers_id = ?;";
+        RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
+        return jdbcTemplate.query(sql,rowMapper, id);
+
+    }
+
+    public void addContract(Contract contract) { //todo
+    }
+
+    public void updateContract() { //todo
+
+    }
+
+    public boolean deleteContract() { //todo
+        return false;
+    }
+
+    //Cars
+
+    public List<Car> fetchAllCars() {
+        String sql = "SELECT cars_id, car_brand, car_models_name, car_models_fueltype, cars_type, cars_license_plate, " +
+                "cars_first_reg, cars_current_km, cars_model_id, car_models_brand_id FROM cars " +
+                "join car_models cm on cars.cars_model_id = cm.car_models_id " +
+                "join car_brands cb on cm.car_models_brand_id = cb.car_brand_id;";
+        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
+        return jdbcTemplate.query(sql, rowMapper);
+    }
+
+    public Car findCarByID(int id) {
+        String sql = "SELECT cars_id, car_brand, car_models_name, car_models_fueltype, cars_type, cars_license_plate, " +
+                "cars_first_reg, cars_current_km, cars_model_id, car_models_brand_id FROM cars " +
+                "join car_models cm on cars.cars_model_id = cm.car_models_id " +
+                "join car_brands cb on cm.car_models_brand_id = cb.car_brand_id " +
+                "WHERE cars_id = ?;";
+        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
+        Car car = jdbcTemplate.queryForObject(sql, rowMapper, id);
+        return car;
+
+    }
+
+    public void addCar(Car car) { //todo
+    }
+
+    public void updateCar(int id, Car tCar) { //todo
+        Car car = findCarByID(id);
+        int modelId = car.getCars_model_id();
+        int brandId = car.getCar_models_brand_id();
+
+    }
+
+    public boolean deleteCar(int id) {
+        try {
+            String sql = "DELETE FROM cars WHERE  cars_id = ?";
+            return jdbcTemplate.update(sql, id) < 0;
+        } catch (DataIntegrityViolationException e) {
+            return true;
+        }
+    }
+
+
+    }

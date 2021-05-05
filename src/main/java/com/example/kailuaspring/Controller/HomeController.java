@@ -26,6 +26,7 @@ public class HomeController {
         return "home/index";
     }
 
+    //Customer
     @GetMapping("/showAllCustomers")
     public String showAllCustomers(Model model){
         List<Customer> customerList = customerService.fetchAllCustomers();
@@ -33,25 +34,12 @@ public class HomeController {
         return "home/showAllCustomers";
     }
 
-    @GetMapping("/showAllCars")
-    public String showAllCars(Model model){
-        List<Car> carList = customerService.fetchAllCars();
-        model.addAttribute("carList", carList);
-        return "home/showAllCars";
-    }
-
-    @GetMapping("/showAllContracts")
-    public String showAllContracts(Model model) {
-        List<Contract> contractList = customerService.fetchAllContracts();
-        model.addAttribute("contractList", contractList);
-        return "home/showAllContracts";
-    }
-
-    @GetMapping("/showContracts/{id}")
-    public String showContracts(@PathVariable("id") int id, Model model) {
-        List<Contract> contractList = customerService.findContractsByCustomer(id);
-        model.addAttribute("contractList", contractList);
-        return "home/showAllContracts";
+    @PostMapping("/searchForCustomer")
+    public String searchForCustomer(Model model, String search) {
+        List<Customer> customerList = customerService.searchForCustomer(search);
+        model.addAttribute("customerList", customerList);
+        model.addAttribute(search);
+        return "home/searchForCustomer";
     }
 
     @GetMapping("/addNewCustomer")
@@ -63,30 +51,6 @@ public class HomeController {
     public String addNewCustomer(@ModelAttribute Customer customer){
         customerService.addCustomer(customer);
         return "redirect:/";
-    }
-
-//    @GetMapping("/findCustomer/{id}")
-//    public String findCustomer(@PathVariable ("id") int id, Model model){
-//        model.addAttribute("customer", customerService.findCustomerByID(id));
-//        return "home/findCustomer";
-//    }
-
-    @PostMapping("/searchForCustomer")
-    public String searchForCustomer(Model model, String search) {
-        List<Customer> customerList = customerService.searchForCustomer(search);
-        model.addAttribute("customerList", customerList);
-        model.addAttribute(search);
-        return "home/searchForCustomer";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") int id) {
-        boolean deleted = customerService.deleteCustomer(id);
-        if (deleted) {
-            return "home/errorPage";
-        } else {
-            return "redirect:/";
-        }
     }
 
     @GetMapping("/updateCustomer/{id}")
@@ -102,9 +66,61 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @GetMapping("/deleteCustomer/{id}")
+    public String deleteCustomer(@PathVariable("id") int id) {
+        boolean deleted = customerService.deleteCustomer(id);
+        if (deleted) {
+            return "home/errorPage";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    //Contract
+    @GetMapping("/showAllContracts")
+    public String showAllContracts(Model model) {
+        List<Contract> contractList = customerService.fetchAllContracts();
+        model.addAttribute("contractList", contractList);
+        return "home/showAllContracts";
+    }
+
+    @GetMapping("/showContracts/{id}")
+    public String showContracts(@PathVariable("id") int id, Model model) {
+        List<Contract> contractList = customerService.findContractsByCustomer(id);
+        model.addAttribute("contractList", contractList);
+        return "home/showAllContracts";
+    }
+
+    //Car
+    @GetMapping("/showAllCars")
+    public String showAllCars(Model model){
+        List<Car> carList = customerService.fetchAllCars();
+        model.addAttribute("carList", carList);
+        return "home/showAllCars";
+    }
+
+    @GetMapping("updateCar/{id}")
+    public String updateCar(@PathVariable("id") int id, Model model) {
+        Car car = customerService.findCarByID(id);
+        model.addAttribute("car", car);
+        return "home/updateCar";
+    }
+
+    @GetMapping("/deleteCar/{id}")
+    public String deleteCar(@PathVariable("id") int id) {
+        boolean deleted = customerService.deleteCar(id);
+        if (deleted) {
+            return "home/errorPage";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+
 //    @GetMapping("showContract/{id}")
 //    public String showContract(@PathVariable("id") int id) {
 //        customerService.
 //
 //    }
+
 }

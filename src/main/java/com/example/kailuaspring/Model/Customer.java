@@ -161,6 +161,7 @@ public class Customer {
     public void setCountry(String country) {
         this.country = country;
     }
+
     public int getAddress_id() {
         return address_id;
     }

@@ -9,6 +9,8 @@ public class Car {
     String cars_license_plate;
     String cars_first_reg;
     String cars_current_km;
+    int cars_model_id;
+    int car_models_brand_id;
 
     public String getCars_id() {
         return cars_id;
@@ -73,4 +75,21 @@ public class Car {
     public void setCars_current_km(String cars_current_km) {
         this.cars_current_km = cars_current_km;
     }
+
+    public int getCars_model_id() {
+        return cars_model_id;
+    }
+
+    public void setCars_model_id(int cars_model_id) {
+        this.cars_model_id = cars_model_id;
+    }
+
+    public int getCar_models_brand_id() {
+        return car_models_brand_id;
+    }
+
+    public void setCar_models_brand_id(int car_models_brand_id) {
+        this.car_models_brand_id = car_models_brand_id;
+    }
+
 }

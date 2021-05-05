@@ -16,7 +16,7 @@
     <a href="/showAllCars">Cars</a>
 </div>
 
-<h1>Car List</h1>
+<h1 class="h1">Car List</h1>
 
 <table id="pagecss">
     <thead>
@@ -29,6 +29,7 @@
         <th>License Plate</th>
         <th>First Register Date</th>
         <th>Current KM</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -42,6 +43,18 @@
         <td th:text="${car.cars_license_plate}"/>
         <td th:text="${car.cars_first_reg}"/>
         <td th:text="${car.cars_current_km}"/>
+
+        <td>
+            <a th:href="@{'/deleteCar/'+${car.cars_id}}">
+                <button class="btn-delete" id="btn-delete" title="Delete Car"><img src="delete.png" alt="Delete Car" width="25px" height="25px"></button>
+            </a>
+
+            <a th:href="@{'/updateCar/'+${car.cars_id}}">
+                <button class="btn-update" id="btn-update" title="Edit Car"><img src="edit.png" alt="Edit Car" width="25px" height="25px"></button>
+            </a>
+
+
+        </td>
     </tr>
     </tbody>
 </table>
