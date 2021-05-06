@@ -92,6 +92,17 @@ public class HomeController {
         return "home/showAllContracts";
     }
 
+    @GetMapping("/addNewContract")
+    public String addNewContract() {
+        return "home/addNewContract";
+    }
+
+    @PostMapping("/addNewContract")
+    public String addNewContract(@ModelAttribute Contract contract) {
+        customerService.addNewContract(contract);
+        return "redirect:/showAllContracts";
+    }
+
     @GetMapping("/updateContract/{id}")
     public String updateContract(@PathVariable("id") int id, Model model) {
         Contract contract = customerService.findContractByID(id);
@@ -103,6 +114,16 @@ public class HomeController {
     public String updateContract(@PathVariable("id") int id, @ModelAttribute Contract contract) {
         customerService.updateContract(id, contract);
         return "redirect:/showAllContracts";
+    }
+
+    @GetMapping("/deleteContract/{id}")
+    public String deleteContract(@PathVariable("id") int id) {
+        boolean deleted = customerService.deleteContract(id);
+        if (deleted) {
+            return "home/errorPage";
+        } else {
+            return "redirect:/showAllContracts";
+        }
     }
 
     //Car

@@ -57,8 +57,16 @@ public class CustomerService {
         return customerRepo.findContractByID(id);
     }
 
+    public void addNewContract(Contract contract) {
+        customerRepo.addContract(contract);
+    }
+
     public void updateContract(int id, Contract contract) {
         customerRepo.updateContract(id, contract);
+    }
+
+    public boolean deleteContract(int id)   {
+        return customerRepo.deleteContract(id);
     }
     //Cars
     public List<Car> fetchAllCars() {

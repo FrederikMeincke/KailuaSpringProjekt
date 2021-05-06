@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Update Customer</title>
+  <link rel="stylesheet" type="text/css" href="../MyCSS.css">
+</head>
+<body>
+
+<!-- Menu Bar -->
+<div class="topnav">
+  <a class="notactive" href="/">Home</a>
+  <a class="active" href="/showAllCustomers">Customers</a>
+  <a class="notactive" href="/showAllContracts">Contracts</a>
+  <a class="notactive" href="/showAllCars">Cars</a>
+</div>
+
+<h1 class="h1">New Contract</h1>
+
+<form th:href="/addNewContract" method="post">
+  <label>Customer ID</label>
+  <br>
+  <input class="labelcss" type="text" name="contracts_customer">
+  <br><br>
+  <label>Start Date</label>
+  <br>
+  <input class="labelcss" type="date" name="contracts_fromdate">
+  <br><br>
+  <label>End Date</label>
+  <br>
+  <input class="labelcss" type="date" name="contracts_todate">
+  <br><br>
+  <label>Allowed KM</label>
+  <br>
+  <input class="labelcss" type="text" name="contracts_maxkm">
+  <br><br>
+  <label>KM At Start</label>
+  <br>
+  <input class="labelcss" type="text" name="contracts_startkm">
+  <br><br>
+  <label>Car ID</label>
+  <br>
+  <input class="labelcss" type="text" name="contracts_cars_id">
+  <br><br>
+
+  <input class="button1 button3" type="submit" value="Update Contract">
+</form>
+
+</body>
+</html>
