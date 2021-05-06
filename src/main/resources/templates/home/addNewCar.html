@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Customer Creator</title>
+  <link rel="stylesheet" type="text/css" href="../MyCSS.css">
+</head>
+<body>
+
+<!-- Menu Bar -->
+<div class="topnav">
+  <a class="notactive" href="/">Home</a>
+  <a class="active" href="/showAllCustomers">Customers</a>
+  <a class="notactive" href="/showAllContracts">Contracts</a>
+  <a class="notactive" href="/showAllCars">Cars</a>
+</div>
+
+<h1 class="h1">Add new Car</h1>
+
+<form th:href="@{'/updateCar/'+${car.cars_id}}" method="post">
+  <label>Brand</label>
+  <br>
+  <input class="labelcss" type="text" name="cars_brand" th:value="${car.car_brand}">
+  <br><br>
+  <label>Model</label>
+  <br>
+  <input class="labelcss" type="text" name="car_models_name" th:value="${car.car_models_name}">
+  <br><br>
+  <label>Fuel Type.</label>
+  <br>
+  <input class="labelcss" type="text" name="car_models_fueltype" th:value="${car.car_models_fueltype}">
+  <br><br>
+  <label>Car Type</label>
+  <br>
+  <input class="labelcss" type="text" name="cars_type" th:value="${car.cars_type}">
+  <br><br>
+  <label>License Plate</label>
+  <br>
+  <input class="labelcss" type="text" name="cars_license_plate" th:value="${car.cars_license_plate}">
+  <br><br>
+  <label>First Register Date</label>
+  <br>
+  <input class="labelcss" type="date" id="cars_first_reg" name="cars_first_reg" th:value="${car.cars_first_reg}">
+  <br><br>
+  <label>Current KM</label>
+  <br>
+  <input class="labelcss" type="text" id="cars_current_km" name="cars_current_km" th:value="${car.cars_current_km}">
+  <br><br>
+
+  <input class="button1 button3" type="submit" value="Update customer">
+</form>
+
+  <input class="button1 button-add-new-customer" type="submit" value="Add New Customer">
+</form>
+</body>
+</html>
