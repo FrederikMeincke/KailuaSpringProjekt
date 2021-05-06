@@ -173,9 +173,18 @@ public class CustomerRepo {
     }
 
     public void addContract(Contract contract) { //todo
+        String contractsql = "INSERT INTO contracts " +
+                "VALUES (Default, ?, ?, ?, ?, ?, ?);";
+        try {
+            jdbcTemplate.update(contractsql, contract.getContracts_customer(),contract.getContracts_fromdate(),
+                    contract.getContracts_todate(), contract.getContracts_maxkm(), contract.getContracts_startkm(),
+                    contract.getContracts_cars_id());
+        } catch (DataAccessException exception) {
+            exception.printStackTrace();
+        }
     }
 
-    public void updateContract(int id, Contract tContract) { //todo
+    public void updateContract(int id, Contract tContract) {
         String contractsql = "UPDATE contracts " +
                 "SET contracts_customer = ?, contracts_fromdate = ?, contracts_todate = ?, " +
                 "contracts_startkm = ?, contracts_maxkm = ?, contracts_cars_id = ? " +
@@ -189,8 +198,15 @@ public class CustomerRepo {
         }
     }
 
-    public boolean deleteContract() { //todo
-        return false;
+    public boolean deleteContract(int id) {
+        String contractsql = "DELETE FROM contracts " +
+                "WHERE contracts_id = ?;";
+        try {
+            return jdbcTemplate.update(contractsql, id) < 0;
+        } catch (DataAccessException exception) {
+            exception.printStackTrace();
+            return true;
+        }
     }
 
     //Cars

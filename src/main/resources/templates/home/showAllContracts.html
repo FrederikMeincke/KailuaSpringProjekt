@@ -32,6 +32,7 @@
         <th>Car model</th>
         <th>Car fuel type</th>
         <th>Car type</th>
+        <th>Actions: </th>
     </tr>
     </thead>
     <tbody>
@@ -51,7 +52,10 @@
 
         <td>
             <a th:href="@{'/updateContract/'+${contract.contracts_id}}">
-                <button class="btn-update" id="btn-update" title="Edit Contract"><img src="edit.png" alt="Edit Contract" width="25px" height="25px"></button>
+                <button class="btn-update" id="btn-update" title="Edit Contract"><img src="../edit.png" alt="Edit Contract" width="25px" height="25px"></button>
+            </a>
+            <a th:href="@{'/deleteContract/'+${contract.contracts_id}}">
+                <button class="btn-delete" id="btn-delete" title="Delete Contract"><img src="../delete.png" alt="Delete Contract" width="25px" height="25px"></button>
             </a>
         </td>
     </tr>
