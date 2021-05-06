@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import javax.sql.RowSet;
+import javax.xml.crypto.Data;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Calendar;
@@ -173,8 +174,19 @@ public class CustomerRepo {
     public void addContract(Contract contract) { //todo
     }
 
-    public void updateContract() { //todo
-
+    public void updateContract(int id, Contract tContract) { //todo
+        System.out.println(tContract.getContracts_customer());
+        String contractsql = "UPDATE contracts " +
+                "SET contracts_customer = ?, contracts_fromdate = ?, contracts_todate = ?, " +
+                "contracts_startkm = ?, contracts_maxkm = ?, contracts_cars_id = ? " +
+                "WHERE contracts_id = ?;";
+        try {
+            jdbcTemplate.update(contractsql, tContract.getContracts_customer(), tContract.getContracts_fromdate(),
+                    tContract.getContracts_todate(), tContract.getContracts_startkm(), tContract.getContracts_maxkm(),
+                    tContract.getContracts_cars_id(), id);
+        } catch (DataAccessException exception) {
+            exception.printStackTrace();
+        }
     }
 
     public boolean deleteContract() { //todo

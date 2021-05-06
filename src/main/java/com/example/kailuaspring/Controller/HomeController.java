@@ -92,6 +92,19 @@ public class HomeController {
         return "home/showAllContracts";
     }
 
+    @GetMapping("/updateContract/{id}")
+    public String updateContract(@PathVariable("id") int id, Model model) {
+        Contract contract = customerService.findContractByID(id);
+        model.addAttribute(contract);
+        return "home/updateContract";
+    }
+
+    @PostMapping("/updateContract/{id}")
+    public String updateContract(@PathVariable("id") int id, @ModelAttribute Contract contract) {
+        customerService.updateContract(id, contract);
+        return "redirect:/showAllContracts";
+    }
+
     //Car
     @GetMapping("/showAllCars")
     public String showAllCars(Model model){

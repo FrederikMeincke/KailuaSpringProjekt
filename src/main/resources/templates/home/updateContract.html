@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Update Customer</title>
+  <link rel="stylesheet" type="text/css" href="../MyCSS.css">
+</head>
+<body>
+
+<!-- Menu Bar -->
+<div class="topnav">
+  <a class="notactive" href="/">Home</a>
+  <a class="active" href="/showAllCustomers">Customers</a>
+  <a class="notactive" href="/showAllContracts">Contracts</a>
+  <a class="notactive" href="/showAllCars">Cars</a>
+</div>
+
+<h1 class="h1">Update Contract</h1>
+
+<form th:href="@{'/updateContract/'+${contract.contracts_id}}" method="post">
+  <label>Customer ID</label>
+  <br>
+  <input class="labelcss" type="text" name="contracts_customer" th:value="${contract.contracts_customer}">
+  <br><br>
+
+
+  <input class="button1 button3" type="submit" value="Update Contract">
+</form>
+
+</body>
+</html>

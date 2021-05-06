@@ -48,6 +48,12 @@
         <td th:text="${contract.car_models_name}"/>
         <td th:text="${contract.car_models_fueltype}"/>
         <td th:text="${contract.cars_type}"/>
+
+        <td>
+            <a th:href="@{'/updateContract/'+${contract.contracts_id}}">
+                <button class="btn-update" id="btn-update" title="Edit Contract"><img src="edit.png" alt="Edit Contract" width="25px" height="25px"></button>
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>

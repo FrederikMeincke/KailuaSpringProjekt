@@ -16,27 +16,32 @@ public class Contract {
     }
 
     private int contracts_id;
+    private int contracts_customer;
     private String customers_name;
     private String contracts_fromdate;
     private String contracts_todate;
     private String contracts_maxkm;
     private String contracts_startkm;
     private String cars_license_plate;
+    private int contracts_cars_id;
     private String car_brand;
     private String car_models_name;
     private FuelType car_models_fueltype;
     private CarsType cars_type;
 
-    public Contract(int contracts_id, String customers_name, String contracts_fromdate, String contracts_todate,
-                    String contracts_maxkm, String contracts_startkm, String cars_license_plate, String car_brand,
-                    String car_models_name, FuelType car_models_fueltype, CarsType cars_type) {
+    public Contract(int contracts_id, int contracts_customer, String customers_name, String contracts_fromdate,
+                    String contracts_todate, String contracts_maxkm, String contracts_startkm,
+                    String cars_license_plate, int contracts_cars_id, String car_brand, String car_models_name,
+                    FuelType car_models_fueltype, CarsType cars_type) {
         this.contracts_id = contracts_id;
+        this.contracts_customer = contracts_customer;
         this.customers_name = customers_name;
         this.contracts_fromdate = contracts_fromdate;
         this.contracts_todate = contracts_todate;
         this.contracts_maxkm = contracts_maxkm;
         this.contracts_startkm = contracts_startkm;
         this.cars_license_plate = cars_license_plate;
+        this.contracts_cars_id = contracts_cars_id;
         this.car_brand = car_brand;
         this.car_models_name = car_models_name;
         this.car_models_fueltype = car_models_fueltype;
@@ -53,6 +58,14 @@ public class Contract {
 
     public void setContracts_id(int contracts_id) {
         this.contracts_id = contracts_id;
+    }
+
+    public int getContracts_customer() {
+        return contracts_customer;
+    }
+
+    public void setContracts_customer(int contract_customer) {
+        this.contracts_customer = contract_customer;
     }
 
     public String getCustomers_name() {
@@ -101,6 +114,14 @@ public class Contract {
 
     public void setCars_license_plate(String cars_license_plate) {
         this.cars_license_plate = cars_license_plate;
+    }
+
+    public int getContracts_cars_id() {
+        return contracts_cars_id;
+    }
+
+    public void setContracts_cars_id(int contracts_cars_id) {
+        this.contracts_cars_id = contracts_cars_id;
     }
 
     public String getCar_brand() {

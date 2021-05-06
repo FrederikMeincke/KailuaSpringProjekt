@@ -53,6 +53,13 @@ public class CustomerService {
 
     }
 
+    public Contract findContractByID(int id)     {
+        return customerRepo.findContractByID(id);
+    }
+
+    public void updateContract(int id, Contract contract) {
+        customerRepo.updateContract(id, contract);
+    }
     //Cars
     public List<Car> fetchAllCars() {
         return customerRepo.fetchAllCars();
