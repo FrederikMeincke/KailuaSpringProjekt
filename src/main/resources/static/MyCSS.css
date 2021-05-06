@@ -179,3 +179,16 @@
 .clear-icon {
     bottom: 20px;
 }
+
+.delay-video {
+    background-color: #008cba;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    margin: 4px 2px;
+    font-size: 16px;
+    cursor: pointer;
+    transition-delay: 9s;
+}
