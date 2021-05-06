@@ -23,15 +23,17 @@
 </a>
 
 <!-- Search Bar -->
-<div class="search-id-name">
-    <form name="search" method="post" action="/searchForCustomer">
+<div class="row">
+
+    <!--Clear Icon-->
+    <form class="search-id-name" name="clear" method="get" action="/showAllCustomers">
+        <input class="column2"  type="image" src="clear.png" width="20px" height="20px" alt="Clear"/>
+    </form>
+
+    <form class="search-id-name" name="search" method="post" action="/searchForCustomer">
         <input type="text" name="search" placeholder="Search here...">
         <!--Search Icon-->
-        <input type="image" src="search.png" width="20px" height="20px" alt="Search"/>
-        <!--Clear Icon-->
-        <form name="clear" method="get" action="/showAllCustomers">
-            <input type="image" src="clear.png" width="20px" height="20px" alt="Clear"/>
-        </form>
+        <input class="column" type="image" src="search.png" width="20px" height="20px" alt="Search"/>
     </form>
 </div>
 <br>

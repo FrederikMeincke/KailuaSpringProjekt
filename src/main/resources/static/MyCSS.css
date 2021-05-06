@@ -144,3 +144,23 @@
     height: 21px;
     width: 14%;
 }
+
+.column {
+    float: right;
+}
+
+.column2 {
+    float: right;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.clear-icon {
+    bottom: 20px;
+}
