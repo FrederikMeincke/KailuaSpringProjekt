@@ -16,17 +16,22 @@
     <a class="notactive" href="/showAllCars">Cars</a>
 </div>
 
-<h1>Search results</h1>
+<h1 class="h1">Customer Search results</h1>
+
+<a href="/addNewCustomer">
+    <button class="button1 button-anc">Add new customer</button>
+</a>
+
 <!-- Search Bar -->
 <div class="search-id-name">
     <form name="search" method="post" action="/searchForCustomer">
         <input type="text" name="search" placeholder="Search here...">
-        <!--todo:lav knap med forstørrelsesglas icon-->
-        <input type="submit" value="Search"/>
-        <!--todo:lav knap med kryds icon-->
-        <a href="/showAllCustomers">
-            <button>Reset filter</button>
-        </a>
+        <!--Search Icon-->
+        <input type="image" src="search.png" width="20px" height="20px" alt="Search"/>
+        <!--Clear Icon-->
+        <form name="clear" method="get" action="/showAllCustomers">
+            <input type="image" src="clear.png" width="20px" height="20px" alt="Clear"/>
+        </form>
     </form>
 </div>
 <br>
