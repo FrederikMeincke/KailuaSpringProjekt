@@ -205,13 +205,60 @@ public class CustomerRepo {
     }
 
     public void addCar(Car car) { //todo
+
+        try {
+            String brandsql = "INSERT INTO car_brands " +
+                    "VALUES (?);";
+            jdbcTemplate.update(brandsql, car.getCar_brand());
+            String lastAddedBrand = "SELECT * FROM car_brands " +
+                    "ORDER BY car_brand_id DESC LIMIT 1;";
+            SqlRowSet rowSet = jdbcTemplate.queryForRowSet(lastAddedBrand);
+            rowSet.next();
+            int lastBrandId = rowSet.getInt(1);
+
+            String modelsql = "INSERT INTO car_models (car_models_brand_id, car_models_name, car_models_fueltype, cars_type) " +
+                    "VALUES (?, ?, ?, ?);";
+            jdbcTemplate.update(modelsql, lastBrandId, car.getCar_models_name(), car.getCar_models_fueltype(), car.getCars_type());
+
+            String lastAddedModel = "SELECT * FROM car_models " +
+                    "ORDER BY car_models_id DESC LIMIT 1;";
+            rowSet = jdbcTemplate.queryForRowSet(lastAddedBrand);
+            rowSet.next();
+            int lastModelId = rowSet.getInt(1);
+            String carsql = "INSERT INTO cars (cars_model_id, cars_license_plate, cars_first_reg, cars_current_km) " +
+                    "VALUES (?, ?, ?, ?)";
+            jdbcTemplate.update(carsql, lastModelId, car.getCars_license_plate(),
+                    car.getCars_first_reg(), car.getCars_current_km());
+        } catch (DataAccessException exception) {
+            exception.printStackTrace();
+        }
     }
 
-    public void updateCar(int id, Car tCar) { //todo
+    public void updateCar(int id, Car tCar) {
         Car car = findCarByID(id);
         int modelId = car.getCars_model_id();
         int brandId = car.getCar_models_brand_id();
 
+        try {
+            String brandsql = "UPDATE car_brands " +
+                    "SET car_brand = ? " +
+                    "WHERE car_brand_id = ?;";
+            jdbcTemplate.update(brandsql, tCar.getCar_brand(), brandId);
+
+            String modelsql = "UPDATE car_models " +
+                    "SET car_models_name = ?, car_models_fueltype = ?, cars_type = ?" +
+                    "WHERE car_models_id = ?;";
+            jdbcTemplate.update(modelsql, tCar.getCar_models_name(), tCar.getCar_models_fueltype(),
+                    tCar.getCars_type(), modelId);
+
+            String carsql = "UPDATE cars " +
+                    "SET cars_license_plate = ?, cars_first_reg = ?, cars_current_km = ? " +
+                    "WHERE cars_id = ?;";
+            jdbcTemplate.update(carsql, tCar.getCars_license_plate(), tCar.getCars_first_reg(),
+                    tCar.getCars_current_km(), car.getCars_id());
+        } catch (DataAccessException exception) {
+            exception.printStackTrace();
+        }
     }
 
     public boolean deleteCar(int id) {

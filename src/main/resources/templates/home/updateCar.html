@@ -21,7 +21,7 @@
 <form th:href="@{'/updateCar/'+${car.cars_id}}" method="post">
   <label>Brand</label>
   <br>
-  <input class="labelcss" type="text" name="cars_brand" th:value="${car.car_brand}">
+  <input class="labelcss" type="text" name="car_brand" th:value="${car.car_brand}">
   <br><br>
   <label>Model</label>
   <br>
@@ -48,7 +48,7 @@
   <input class="labelcss" type="text" id="cars_current_km" name="cars_current_km" th:value="${car.cars_current_km}">
   <br><br>
 
-  <input class="button1 button3" type="submit" value="Update customer">
+  <input class="button1 button3" type="submit" value="Update Car">
 </form>
 
 </body>

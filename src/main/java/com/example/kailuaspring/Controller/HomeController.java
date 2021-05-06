@@ -106,6 +106,13 @@ public class HomeController {
         return "home/updateCar";
     }
 
+    @PostMapping("updateCar/{id}")
+    public String updateCar(@PathVariable("id") int id, @ModelAttribute Car car) {
+        customerService.updateCar(id, car);
+        return "redirect:/showAllCars";
+
+    }
+
     @GetMapping("/deleteCar/{id}")
     public String deleteCar(@PathVariable("id") int id) {
         boolean deleted = customerService.deleteCar(id);
