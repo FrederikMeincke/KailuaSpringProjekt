@@ -9,8 +9,8 @@ public class Customer {
     @Id
     private int customers_id;
     private String customers_name;
-    private int customers_mobile;
-    private int customers_phone;
+    private String customers_mobile;
+    private String customers_phone;
     private String customers_email;
     private String customers_drivers_license;
     private String customers_drivers_license_issuedate;
@@ -27,7 +27,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int customers_id, String customers_name, int customers_mobile, int customers_phone,
+    public Customer(int customers_id, String customers_name, String customers_mobile, String customers_phone,
                     String customers_email, String customers_drivers_license, String customers_drivers_license_issuedate,
                     String customers_drivers_license_expiredate, String address_street, String address_number,
                     String address_floor, int address_id, int zip, int zip_id, String city, String country) {
@@ -66,19 +66,19 @@ public class Customer {
         this.customers_name = customers_name;
     }
 
-    public int getCustomers_mobile() {
+    public String getCustomers_mobile() {
         return customers_mobile;
     }
 
-    public void setCustomers_mobile(int customers_mobile) {
+    public void setCustomers_mobile(String customers_mobile) {
         this.customers_mobile = customers_mobile;
     }
 
-    public int getCustomers_phone() {
+    public String getCustomers_phone() {
         return customers_phone;
     }
 
-    public void setCustomers_phone(int customers_phone) {
+    public void setCustomers_phone(String customers_phone) {
         this.customers_phone = customers_phone;
     }
 
