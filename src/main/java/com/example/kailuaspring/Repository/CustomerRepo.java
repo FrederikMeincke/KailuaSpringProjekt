@@ -204,17 +204,18 @@ public class CustomerRepo {
 
     }
 
-    public void addCar(Car car) { //todo
+    public void addNewCar(Car car) { //todo
 
+        System.out.println(car.getCar_brand());
         try {
-            String brandsql = "INSERT INTO car_brands " +
-                    "VALUES (?);";
+            String brandsql = "INSERT INTO car_brands (car_brand_id, car_brand) " +
+                    "VALUES (DEFAULT, ?);";
             jdbcTemplate.update(brandsql, car.getCar_brand());
             String lastAddedBrand = "SELECT * FROM car_brands " +
                     "ORDER BY car_brand_id DESC LIMIT 1;";
             SqlRowSet rowSet = jdbcTemplate.queryForRowSet(lastAddedBrand);
             rowSet.next();
-            int lastBrandId = rowSet.getInt(1);
+            int lastBrandId = rowSet.getInt("car_brand_id");
 
             String modelsql = "INSERT INTO car_models (car_models_brand_id, car_models_name, car_models_fueltype, cars_type) " +
                     "VALUES (?, ?, ?, ?);";
@@ -222,9 +223,9 @@ public class CustomerRepo {
 
             String lastAddedModel = "SELECT * FROM car_models " +
                     "ORDER BY car_models_id DESC LIMIT 1;";
-            rowSet = jdbcTemplate.queryForRowSet(lastAddedBrand);
+            rowSet = jdbcTemplate.queryForRowSet(lastAddedModel);
             rowSet.next();
-            int lastModelId = rowSet.getInt(1);
+            int lastModelId = rowSet.getInt("car_models_id");
             String carsql = "INSERT INTO cars (cars_model_id, cars_license_plate, cars_first_reg, cars_current_km) " +
                     "VALUES (?, ?, ?, ?)";
             jdbcTemplate.update(carsql, lastModelId, car.getCars_license_plate(),

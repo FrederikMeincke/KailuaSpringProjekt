@@ -4,6 +4,7 @@ import com.example.kailuaspring.Model.Car;
 import com.example.kailuaspring.Model.Contract;
 import com.example.kailuaspring.Model.Customer;
 import com.example.kailuaspring.Service.CustomerService;
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -97,6 +98,17 @@ public class HomeController {
         List<Car> carList = customerService.fetchAllCars();
         model.addAttribute("carList", carList);
         return "home/showAllCars";
+    }
+
+    @GetMapping("/addNewCar")
+    public String addNewCar() {
+        return "home/addNewCar";
+    }
+
+    @PostMapping("/addNewCar")
+    public String addNewCar(@ModelAttribute Car car) {
+        customerService.addNewCar(car);
+        return "redirect:/showAllCars";
     }
 
     @GetMapping("updateCar/{id}")

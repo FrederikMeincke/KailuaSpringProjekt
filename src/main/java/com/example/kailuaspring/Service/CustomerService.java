@@ -62,8 +62,8 @@ public class CustomerService {
         return customerRepo.findCarByID(id);
     }
 
-    public void addCar(Car car){
-        customerRepo.addCar(car);
+    public void addNewCar(Car car){
+        customerRepo.addNewCar(car);
     }
 
     public void updateCar(int id, Car car){

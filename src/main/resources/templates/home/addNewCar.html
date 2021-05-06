@@ -18,40 +18,37 @@
 
 <h1 class="h1">Add new Car</h1>
 
-<form th:href="@{'/updateCar/'+${car.cars_id}}" method="post">
+<form action="/addNewCar" method="post">
   <label>Brand</label>
   <br>
-  <input class="labelcss" type="text" name="cars_brand" th:value="${car.car_brand}">
+  <input class="labelcss" type="text" name="car_brand">
   <br><br>
   <label>Model</label>
   <br>
-  <input class="labelcss" type="text" name="car_models_name" th:value="${car.car_models_name}">
+  <input class="labelcss" type="text" name="car_models_name">
   <br><br>
   <label>Fuel Type.</label>
   <br>
-  <input class="labelcss" type="text" name="car_models_fueltype" th:value="${car.car_models_fueltype}">
+  <input class="labelcss" type="text" name="car_models_fueltype">
   <br><br>
   <label>Car Type</label>
   <br>
-  <input class="labelcss" type="text" name="cars_type" th:value="${car.cars_type}">
+  <input class="labelcss" type="text" name="cars_type">
   <br><br>
   <label>License Plate</label>
   <br>
-  <input class="labelcss" type="text" name="cars_license_plate" th:value="${car.cars_license_plate}">
+  <input class="labelcss" type="text" name="cars_license_plate">
   <br><br>
   <label>First Register Date</label>
   <br>
-  <input class="labelcss" type="date" id="cars_first_reg" name="cars_first_reg" th:value="${car.cars_first_reg}">
+  <input class="labelcss" type="date" id="cars_first_reg" name="cars_first_reg">
   <br><br>
   <label>Current KM</label>
   <br>
-  <input class="labelcss" type="text" id="cars_current_km" name="cars_current_km" th:value="${car.cars_current_km}">
+  <input class="labelcss" type="text" id="cars_current_km" name="cars_current_km">
   <br><br>
 
-  <input class="button1 button3" type="submit" value="Update customer">
-</form>
-
-  <input class="button1 button-add-new-customer" type="submit" value="Add New Customer">
+  <input class="button1 button3" type="submit" value="Add Car">
 </form>
 </body>
 </html>
