@@ -145,9 +145,19 @@
     width: 14%;
 }
 
-.drop-down-menu-css {
-    height: 21px;
-    width: 14%;
+.select {
+    width: 275px;
+    height: 28px;
+}
+
+.select-date {
+    width: 270px;
+    height: 25px;
+}
+
+.select-date-2 {
+    width: 267px;
+    height: 25px;
 }
 
 .column {
