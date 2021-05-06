@@ -136,14 +136,15 @@ public class CustomerRepo {
                 "JOIN customers cu on contracts.contracts_customer = cu.customers_id " +
                 "JOIN cars c on c.cars_id = contracts.contracts_cars_id " +
                 "JOIN car_models cm on c.cars_model_id = cm.car_models_id " +
-                "JOIN car_brands cb on cb.car_brand_id = cm.car_models_brand_id;";
+                "JOIN car_brands cb on cb.car_brand_id = cm.car_models_brand_id " +
+                "ORDER BY contracts_id ASC;";
         RowMapper<Contract> rowMapper = new BeanPropertyRowMapper<>(Contract.class);
         return jdbcTemplate.query(sql,rowMapper);
     }
 
     public Contract findContractByID(int id) {
-        String sql = "SELECT contracts_id, cu.customers_name, contracts_fromdate, contracts_todate, contracts_maxkm," +
-                " contracts_startkm, c.cars_license_plate, cb.car_brand, cm.car_models_name, cm.car_models_fueltype," +
+        String sql = "SELECT contracts_id, contracts_customer, cu.customers_name, contracts_fromdate, contracts_todate, contracts_maxkm," +
+                " contracts_startkm, c.cars_license_plate, contracts_cars_id, cb.car_brand, cm.car_models_name, cm.car_models_fueltype," +
                 " cm.cars_type FROM" +
                 " contracts " +
                 "JOIN customers cu on contracts.contracts_customer = cu.customers_id " +
@@ -175,7 +176,6 @@ public class CustomerRepo {
     }
 
     public void updateContract(int id, Contract tContract) { //todo
-        System.out.println(tContract.getContracts_customer());
         String contractsql = "UPDATE contracts " +
                 "SET contracts_customer = ?, contracts_fromdate = ?, contracts_todate = ?, " +
                 "contracts_startkm = ?, contracts_maxkm = ?, contracts_cars_id = ? " +
