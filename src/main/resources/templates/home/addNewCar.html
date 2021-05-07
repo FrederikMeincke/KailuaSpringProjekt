@@ -21,11 +21,11 @@
 <form action="/addNewCar" method="post">
   <label>Brand</label>
   <br>
-  <input class="labelcss" type="text" name="car_brand" placeholder="I.e. Ford">
+  <input class="labelcss" type="text" name="car_brand" placeholder="I.e. Ford"> <span>*</span>
   <br><br>
   <label>Model</label>
   <br>
-  <input class="labelcss" type="text" name="car_models_name" placeholder="I.e. Focus">
+  <input class="labelcss" type="text" name="car_models_name" placeholder="I.e. Focus"> <span>*</span>
   <br><br>
 
   <label class="select" for="car_models_fueltype" accesskey="car_models_fueltype">Fuel Type:<br></label>
@@ -35,6 +35,7 @@
     <option value="Petrol">Petrol
     <option value="Diesel">Diesel
   </select>
+  <span>*</span>
   <br><br>
   <label class="select" for="cars_type" accesskey="cars_type">Car Type:<br></label>
   <select class="select" name="cars_type" id="cars_type">
@@ -44,19 +45,19 @@
     <option value="FAM">FAM (Family)
     <option value="SPRT">SPRT (Sport)
   </select>
-
+  <span>*</span>
   <br><br>
   <label>License Plate</label>
   <br>
-  <input class="labelcss" type="text" name="cars_license_plate" placeholder="I.e. XY11111Z">
+  <input class="labelcss" type="text" name="cars_license_plate" placeholder="I.e. XY11111Z"> <span>*</span>
   <br><br>
   <label>First Register Date</label>
   <br>
-  <input class="select-date" type="date" name="cars_first_reg">
+  <input class="select-date" type="date" name="cars_first_reg"> <span>*</span>
   <br><br>
   <label>Current KM</label>
   <br>
-  <input class="labelcss" type="text" id="cars_current_km" name="cars_current_km" placeholder="I.e. 1000">
+  <input class="labelcss" type="text" id="cars_current_km" name="cars_current_km" placeholder="I.e. 1000"> <span>*</span>
   <br><br>
 
   <input class="button1 button-anc" type="submit" value="Add Car">
