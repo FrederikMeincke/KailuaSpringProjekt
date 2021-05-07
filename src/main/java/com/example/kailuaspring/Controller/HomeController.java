@@ -54,8 +54,7 @@ public class HomeController {
                         customer.getCustomers_phone().isEmpty() || customer.getCustomers_email().isEmpty() ||
                         customer.getCustomers_drivers_license().isEmpty() || customer.getCustomers_drivers_license_issuedate().isEmpty() ||
                         customer.getCustomers_drivers_license_expiredate().isEmpty() || customer.getAddress_street().isEmpty() ||
-                        customer.getAddress_number().isEmpty() || customer.getAddress_floor().isEmpty() ||
-                        customer.getCity().isEmpty() || customer.getZip() == 0;
+                        customer.getAddress_number().isEmpty() || customer.getCity().isEmpty() || customer.getZip() == 0;
         if(emptyField) {
             return "home/error/errorPage";
         }
@@ -72,6 +71,15 @@ public class HomeController {
 
     @PostMapping("/updateCustomer/{id}")
     public String updateCustomer(@PathVariable("id") int id, @ModelAttribute Customer customer) {
+        boolean emptyField =
+                customer.getCustomers_name().isEmpty() || customer.getCustomers_mobile().isEmpty() ||
+                        customer.getCustomers_phone().isEmpty() || customer.getCustomers_email().isEmpty() ||
+                        customer.getCustomers_drivers_license().isEmpty() || customer.getCustomers_drivers_license_issuedate().isEmpty() ||
+                        customer.getCustomers_drivers_license_expiredate().isEmpty() || customer.getAddress_street().isEmpty() ||
+                        customer.getAddress_number().isEmpty() || customer.getCity().isEmpty() || customer.getZip() == 0;
+        if(emptyField) {
+            return "home/error/errorPage";
+        }
         customerService.updateCustomer(id, customer);
         return "redirect:/showAllCustomers";
     }
@@ -108,12 +116,12 @@ public class HomeController {
 
     @PostMapping("/addNewContract")
     public String addNewContract(@ModelAttribute Contract contract) {
-
         boolean emptyField =
                 contract.getContracts_customer() == 0 ||
                         contract.getContracts_fromdate().isEmpty() || contract.getContracts_todate().isEmpty() ||
                         contract.getContracts_maxkm().isEmpty() || contract.getContracts_startkm().isEmpty() ||
                         contract.getContracts_cars_id() == 0;
+
         if(emptyField) {
             return "home/error/errorPage";
         }
@@ -130,6 +138,15 @@ public class HomeController {
 
     @PostMapping("/updateContract/{id}")
     public String updateContract(@PathVariable("id") int id, @ModelAttribute Contract contract) {
+        boolean emptyField =
+                contract.getContracts_customer() == 0 ||
+                        contract.getContracts_fromdate().isEmpty() || contract.getContracts_todate().isEmpty() ||
+                        contract.getContracts_maxkm().isEmpty() || contract.getContracts_startkm().isEmpty() ||
+                        contract.getContracts_cars_id() == 0;
+        if(emptyField) {
+            return "home/error/errorPage";
+        }
+
         customerService.updateContract(id, contract);
         return "redirect:/showAllContracts";
     }
@@ -159,10 +176,9 @@ public class HomeController {
 
     @PostMapping("/addNewCar")
     public String addNewCar(@ModelAttribute Car car) {
-        boolean emptyField = car.getCar_brand().isEmpty() || car.getCar_models_name().isEmpty() || car.getCar_models_name().isEmpty()
+        boolean emptyField = car.getCar_brand().isEmpty() || car.getCar_models_name().isEmpty()
                 || car.getCar_models_fueltype().isEmpty() || car.getCars_type().isEmpty() || car.getCars_license_plate().isEmpty()
-                || car.getCars_first_reg().isEmpty() || car.getCars_current_km().isEmpty() || car.getCars_model_id() == 0
-                || car.getCar_models_brand_id() == 0;
+                || car.getCars_first_reg().isEmpty() || car.getCars_current_km().isEmpty();
 
         if(emptyField) {
             return "home/error/errorPage";
@@ -181,6 +197,14 @@ public class HomeController {
 
     @PostMapping("updateCar/{id}")
     public String updateCar(@PathVariable("id") int id, @ModelAttribute Car car) {
+        boolean emptyField = car.getCar_brand().isEmpty() || car.getCar_models_name().isEmpty()
+                || car.getCar_models_fueltype().isEmpty() || car.getCars_type().isEmpty() || car.getCars_license_plate().isEmpty()
+                || car.getCars_first_reg().isEmpty() || car.getCars_current_km().isEmpty();
+
+        if (emptyField) {
+            return "redirect:home/error/errorPage";
+        }
+
         customerService.updateCar(id, car);
         return "redirect:/showAllCars";
 
@@ -190,7 +214,7 @@ public class HomeController {
     public String deleteCar(@PathVariable("id") int id) {
         boolean deleted = customerService.deleteCar(id);
         if (deleted) {
-            return "home/errorPage";
+            return "home/error/errorPage";
         } else {
             return "redirect:/showAllCars";
         }
