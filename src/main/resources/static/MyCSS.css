@@ -103,6 +103,10 @@
     width: 267px;
 }
 
+.picture-center {
+    text-align: center;
+}
+
 .select {
     width: 275px;
     height: 28px;
