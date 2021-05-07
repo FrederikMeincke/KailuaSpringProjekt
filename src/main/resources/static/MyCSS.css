@@ -67,42 +67,6 @@
     color: white;
 }
 
-
-.button-add-new-customer {
-    background-color: white;
-    color: black;
-    border: 1px solid #e7e7e7;
-}
-
-.button-add-new-customer:hover {
-    background-color: #555555;
-    color: white;
-}
-
-.button4 {
-    background-color: #008cba;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    display: inline-block;
-    margin: 4px 2px;
-    font-size: 16px;
-    cursor: pointer;
-    transition-duration: 0.4s;
-}
-
-.button5 {
-    background-color: white;
-    color: black;
-    border: 1px solid #008cba;
-}
-
-.button5:hover {
-    background-color: #008cba;
-    color: white;
-}
-
 .topnav {
     background-color: #333;
     overflow: hidden;
@@ -132,12 +96,6 @@
     font-family: sans-serif;
     background-color: #0475aa;
     color: #ffffff;
-}
-
-#issuedate, #expiredate, #cars_first_reg {
-    height: 21px;
-    width: 14.25%;
-
 }
 
 .labelcss {
@@ -176,10 +134,6 @@
     display: table;
 }
 
-.clear-icon {
-    bottom: 20px;
-}
-
 .delay-video {
     background-color: #008cba;
     border: none;
@@ -191,9 +145,4 @@
     font-size: 16px;
     cursor: pointer;
     transition-delay: 9s;
-}
-
-span {
-    font-size:20px;
-    transform: scale(.5, 1);
 }
