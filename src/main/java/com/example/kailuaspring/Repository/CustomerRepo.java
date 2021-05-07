@@ -59,7 +59,7 @@ public class CustomerRepo {
         return jdbcTemplate.query(sql,rowMapper);
     }
 
-    public void addCustomer(Customer customer){
+    public void addCustomer(Customer customer) {
         String sqlZipCity = "INSERT INTO zipcity (zip_id, zip, city, country) VALUES (DEFAULT, ?, ?, 'Denmark')";
 
         jdbcTemplate.update(sqlZipCity, customer.getZip(), customer.getCity());
@@ -232,7 +232,7 @@ public class CustomerRepo {
 
     }
 
-    public void addNewCar(Car car) { //todo
+    public void addNewCar(Car car) {
 
         System.out.println(car.getCar_brand());
         try {

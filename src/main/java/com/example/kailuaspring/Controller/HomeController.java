@@ -4,7 +4,6 @@ import com.example.kailuaspring.Model.Car;
 import com.example.kailuaspring.Model.Contract;
 import com.example.kailuaspring.Model.Customer;
 import com.example.kailuaspring.Service.CustomerService;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -141,9 +140,13 @@ public class HomeController {
 
     @PostMapping("/addNewCar")
     public String addNewCar(@ModelAttribute Car car) {
+        if(car.getCars_license_plate().isEmpty()) {
+            return "home/error/carErrorPage";
+        }
         customerService.addNewCar(car);
         return "redirect:/showAllCars";
     }
+
 
     @GetMapping("updateCar/{id}")
     public String updateCar(@PathVariable("id") int id, Model model) {

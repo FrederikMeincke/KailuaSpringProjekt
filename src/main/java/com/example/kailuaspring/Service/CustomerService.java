@@ -5,6 +5,8 @@ import com.example.kailuaspring.Model.Contract;
 import com.example.kailuaspring.Model.Customer;
 import com.example.kailuaspring.Repository.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -77,7 +79,7 @@ public class CustomerService {
         return customerRepo.findCarByID(id);
     }
 
-    public void addNewCar(Car car){
+    public void addNewCar(Car car) {
         customerRepo.addNewCar(car);
     }
 
