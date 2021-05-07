@@ -21,11 +21,11 @@
 <form action="/addNewCar" method="post">
   <label>Brand</label>
   <br>
-  <input class="labelcss" type="text" name="car_brand" placeholder="I.e. Ford"> <span>*</span>
+  <input class="labelcss" type="text" name="car_brand" placeholder="I.e. Ford"> <span style="color: red">*</span>
   <br><br>
   <label>Model</label>
   <br>
-  <input class="labelcss" type="text" name="car_models_name" placeholder="I.e. Focus"> <span>*</span>
+  <input class="labelcss" type="text" name="car_models_name" placeholder="I.e. Focus"> <span style="color: red">*</span>
   <br><br>
 
   <label class="select" for="car_models_fueltype" accesskey="car_models_fueltype">Fuel Type:<br></label>
@@ -35,7 +35,7 @@
     <option value="Petrol">Petrol
     <option value="Diesel">Diesel
   </select>
-  <span>*</span>
+  <span style="color: red">*</span>
   <br><br>
   <label class="select" for="cars_type" accesskey="cars_type">Car Type:<br></label>
   <select class="select" name="cars_type" id="cars_type">
@@ -45,21 +45,21 @@
     <option value="FAM">FAM (Family)
     <option value="SPRT">SPRT (Sport)
   </select>
-  <span>*</span>
+  <span style="color: red">*</span>
   <br><br>
   <label>License Plate</label>
   <br>
-  <input class="labelcss" type="text" name="cars_license_plate" placeholder="I.e. XY11111Z"> <span>*</span>
+  <input class="labelcss" type="text" name="cars_license_plate" placeholder="I.e. XY11111Z"> <span style="color: red">*</span>
   <br><br>
   <label>First Register Date</label>
   <br>
-  <input class="select-date" type="date" name="cars_first_reg"> <span>*</span>
+  <input class="select-date" type="date" name="cars_first_reg"> <span style="color: red">*</span>
   <br><br>
   <label>Current KM</label>
   <br>
-  <input class="labelcss" type="text" id="cars_current_km" name="cars_current_km" placeholder="I.e. 1000"> <span>*</span>
+  <input class="labelcss" type="text" id="cars_current_km" name="cars_current_km" placeholder="I.e. 1000"> <span style="color: red">*</span>
   <br><br>
-
+  <p style="font-size: 14px">ALLE FIELDS WITH <i style="color: red; font-size: 24px">*</i> MUST BE FILLED</p>
   <input class="button1 button-anc" type="submit" value="Add Car">
 </form>
 
